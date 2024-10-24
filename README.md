@@ -1,4 +1,6 @@
-<!-- git clone https://github.com/40tude/fraud_detection.git 
+<!-- 
+Aller dans un répertoire dans lequel vous allez créer le répertoire du projet
+git clone https://github.com/40tude/fraud_detection.git 
 mv .\fraud_detection\ .\fraud_detection_2\
 cd .\fraud_detection_2\
 Remove-Item ./.git/ -Recurse
@@ -6,30 +8,97 @@ conda create --name fraud2 python=3.12 -y
 conda activate fraud2
 code .
 Installer mypy
+    * Depuis le terminal de VSCode
     * Web = https://mypy.readthedocs.io/en/stable/getting_started.html#strict-mode-and-configuration
-    * dans terminal VSCode
     * conda install mypy -y 
-    À la racine du projet, créer mypy.ini
-    Qui contient
-        [mypy]
-        python_version = 3.12  # ou la version de Python que tu utilises
-        strict = True
-        ignore_missing_imports = True
-        allow_untyped_globals = False
-        disallow_untyped_defs = True
-        disallow_incomplete_defs = True
-        no_implicit_optional = True
-        warn_unused_ignores = True
-        warn_redundant_casts = True
-        warn_return_any = True
-Relire .gitignore
+À la racine du projet, créer mypy.ini qui contient
+```
+[mypy]
+python_version = 3.12  
+ignore_missing_imports = True
+strict = True
+warn_return_any = True
+warn_unused_ignores = True
+show_error_codes = True
+color_output = True
+```
 
-Quitter VSCode
+Relire le contenu de .gitignore
+
+Créer le répertoire ./data
+Y déposer fraud_test.csv qui est dispo ici : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
+
 -->
 
 # fraud_detection_2 project 
 
 * This is an updated/extended/expanded version of the first version of the [fraud_detection](https://github.com/40tude/fraud_detection) project
+
+
+## Getting re-started
+
+* I'm an happy user of WIN 11 some step may defer if you run a Linux based system
+* Go to a directory where you will create the project directory.  
+
+```bash
+git clone https://github.com/40tude/fraud_detection.git
+mv ./fraud_detection/ ./fraud_detection_2/
+cd ./fraud_detection_2/
+Remove-Item ./.git/ -Recurse
+conda create --name fraud2 python=3.12 -y
+conda activate fraud2
+code .
+```
+
+
+### Install mypy  
+* From the VSCode terminal  
+* Web = https://mypy.readthedocs.io/en/stable/getting_started.html#strict-mode-and-configuration  
+
+```bash
+conda install mypy -y 
+```
+
+At the root of the project, create `mypy.ini` containing :
+
+```
+[mypy]
+python_version = 3.12  
+ignore_missing_imports = True
+strict = True
+warn_return_any = True
+warn_unused_ignores = True
+show_error_codes = True
+color_output = True
+```
+
+### Get the train data
+* Create the directory `./data`  
+* Get a copy of `fraud_test.csv` from here : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
+* And drop it in ``./data``
+
+### Miscelaneous
+* Review the contents of `.gitignore`
+
+### First commit on GitHub
+
+
+
+## EDA
+* Go to ``98_EDA`` and open ``eda.ipynb``
+* Open a terminal in VSCode
+
+```bash
+conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
+```
+
+* Restart the kernel
+* Approve when VSCode ask to install ??? for Jupyter
+* You should be go to go
+* Run All
+
+
+
 
 ## About contributions
 This project was developed for personal and educational purposes. Feel free to explore and use it to enhance your own learning in machine learning.
