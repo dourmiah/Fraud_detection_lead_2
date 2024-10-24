@@ -1,0 +1,64 @@
+# fichiers à ignorer
+secrets.ps1
+__pycache__/
+.mypy_cache/
+
+# *.log
+
+# répertoires à ignorer
+data/
+.vscode/
+.git/
+__pycache__/
+
+# Large files Size > 100MB (warning à 50MB)
+# Pas moyen de spécifier la taille dans .gitignore
+# Get-ChildItem ./ -recurse | where-object {$_.length -gt 100000000} | Sort-Object length | ft fullname, length -auto
+
+# Ajouter ci-dessous les gros fichiers listés par la commande précédente
+# Initialement fraud_test.csv est disponible ici : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
+# Les 2 fichiers ci-dessous sont couverts car ils sont dans ./data qu'on ignore
+# data.xlsx
+# fraud_test.csv
+
+###############################################################################
+# This may help
+
+# Afficher tous les fichiers secret*.*
+# Get-ChildItem -Path . -Recurse -Force -Filter "secret*.*" | ForEach-Object { $_.FullName } 
+
+# Retrouver la taille du répertoire projet - Github 5GB max
+# (Get-ChildItem . -Recurse | Measure-Object -Property Length -sum).sum/1GB
+
+# Recherche des fichiers qui contiennent le motif "AWS_SECRET_ACCESS_KEY" et affiche les chemins des fichiers où ce motif est trouvé.
+# Get-ChildItem -Recurse -File | Select-String -Pattern "AWS_SECRET_ACCESS_KEY" | Select-Object -ExpandProperty Path
+
+# Lister les 20 plus gros fichiers dans un répertoire et ses sous-répertoires
+# Get-ChildItem -Path . -Recurse | Sort-Object Length -Descending | Select-Object FullName, Length -First 20
+
+# Recherche des répertoires nommés .aws dans le répertoire courant et ses sous-répertoires
+# Get-ChildItem -Path . -Directory -Recurse -Force | Where-Object { $_.Name -eq ".aws" }
+
+# Lister tous les fichiers PNG dans un répertoire et ses sous-répertoires, puis d'afficher leurs chemins complets.
+# Get-ChildItem -Path . -Filter *.png -Recurse | Select-Object -ExpandProperty FullName
+
+
+
+# Plus utile car il n'existent plus
+# secrets.sh
+# secrets.yaml
+# python.config
+
+# .aws/
+# *.aws
+# fichiers type my-keypair.pem (clé AWS)
+# *.pem
+
+# Var d'environnement docker compose
+# Voir https://app.jedha.co/course/docker-reminders-l/docker-compose-l
+# *.env 
+# *.pyc
+
+
+
+
