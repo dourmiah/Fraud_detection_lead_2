@@ -1,5 +1,5 @@
 # fraud_detection_2 project 
-# ZOUBIDA !
+
 * This is an updated/extended/expanded version of the first version of the [fraud_detection](https://github.com/40tude/fraud_detection) project
 
 
