@@ -1,10 +1,13 @@
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+
 # AWS
-On va créer un bucket, 2 répertoires et un user qui aura les droits dessus
-* Le premier répertoire ``data`` contiendra les données d'entrainements
-* Le second `artifacts` recevra les artifacts des entrainements de nos différents modèles
+We will create a bucket, 2 directories, and a user who will have permissions on them.
+* The first directory `data` will contain the training data.
+* The second directory `artifacts` will receive the artifacts from the training of our various models.
 
 
-## Créer un bucket sur AWS S3
+## Create a Bucket on AWS S3
 
 <p align="center">
 <img src="./assets/img01.png" alt="drawing" width="600"/>
@@ -14,10 +17,10 @@ On va créer un bucket, 2 répertoires et un user qui aura les droits dessus
 <img src="./assets/img02.png" alt="drawing" width="600"/>
 <p>
 
-## Créer 2 répertoires dans le bucket
+## Create 2 Directories in the Bucket
 
-* Dans ``data`` on pourra aller lire les données pour entrainer le modèle
-* Dans ``artifacts`` on ira y stocker, lors des entrainements, les artifacts (images, paramètres...)
+* In `data`, we will read the data to train the model.
+* In `artifacts`, we will store the artifacts (images, parameters, etc.) during training.
 
 <p align="center">
 <img src="./assets/img03.png" alt="drawing" width="600"/>
@@ -27,9 +30,9 @@ On va créer un bucket, 2 répertoires et un user qui aura les droits dessus
 <img src="./assets/img04.png" alt="drawing" width="600"/>
 <p>
 
-* Copier et mettre de côté les 2 URI
+* Copy and save the 2 URIs.
 
-## Créer un user sur AWS IAM avec des droits S3 full access
+## Create a User on AWS IAM with S3 Full Access Rights
 
 <p align="center">
 <img src="./assets/img05.png" alt="drawing" width="600"/>
@@ -43,86 +46,89 @@ On va créer un bucket, 2 répertoires et un user qui aura les droits dessus
 <img src="./assets/img07.png" alt="drawing" width="600"/>
 <p>
 
-* Copier et mettre de côté l'identifiant et la clé d'accès
+* Copy and save the access key ID and secret key.
 
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# Dockerfile
+
+Read the content of the `Dockerfile` located next to this `README.md`.
 
 
-# Fichier Dockerfile
+# Deploy an MLflow Tracking Server on Heroku
 
-Le lire le contenu du fichier ``Dockefile`` qui est à côté de ce ``readme.md``
+We will run an MLflow tracking server on Heroku.
+* This server will use a PostgreSQL database (also on Heroku) to store the parameters and tags of each training session.
+* If needed, it will fetch the training artifacts from the AWS S3 directory we just created.
 
-
-
-# Déployer un mlflow tracking server sur Heroku
-
-On va faire tourner sur Heroku, un serveur mlflow tracking. 
-* Ce dernier utilisera une base PostgreSQL (aussi sur Heroku) pour stocker les paramètres et les tags de chaque entrainement
-* Si besoin, il ira rechercher les artifacts des entrainements sur le répertoire AWS S3 que l'on vient de créer
-
-Pour déployer le serveur mlflow tracking :
-* S'assurer que Docker tourne
-* Ouvrir un terminal
-    * heroku login
-    * heroku create fraud-202406   
-    * heroku container:login 
-    * heroku container:push web -a fraud-202406 
-    * heroku container:release web -a fraud-202406 
+To deploy the MLflow tracking server:
+* Ensure that Docker is running.
+* Open a terminal.
+    * `heroku login`
+    * `heroku create fraud-202406`   
+    * `heroku container:login` 
+    * `heroku container:push web -a fraud-202406` 
+    * `heroku container:release web -a fraud-202406` 
 
 <p align="center">
 <img src="./assets/img08.png" alt="drawing" width="600"/>
 <p>
 
-# La base SQL pour le serveur mlflow tracking
 
-Sur la page Web de l'app fraud-202406 (sur Heroku)
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# SQL Database for the MLflow Tracking Server
 
-* Cliquer sur Ressources
-* Ajouter add on
-* Chercher postgres Heroku
-* Accepter d'être facturé
-* Attendre...
+On the web page of the app `fraud-202406` (on Heroku):
+
+* Click on Resources.
+* Add an add-on.
+* Search for Heroku Postgres.
+* Agree to being charged.
+* Wait...
 
 <p align="center">
 <img src="./assets/img09.png" alt="drawing" width="600"/>
 <p>
 
-* Cliquer sur Heroku Postgres
-* Dans la page qui s'ouvre...
-* Cliquer sur Settings
+* Click on Heroku Postgres.
+* In the page that opens...
+* Click on Settings.
 
 <p align="center">
 <img src="./assets/img10.png" alt="drawing" width="600"/>
 <p>
 
-* View credential
-* Copier le lien URI
-* Ajouter "ql" à "postgres://…"
-* Le mettre de côté
+* View credentials.
+* Copy the URI link.
+* Add "ql" to "postgres://…"
+* Save it.
 
-
-Revenir à la section ``settings`` de l'app fraud-202406
+Return to the `settings` section of the app `fraud-202406`.
 
 <p align="center">
 <img src="./assets/img11.png" alt="drawing" width="600"/>
 <p>
 
-* Cliquer sur ``Reveal Config Vars`` et saisir les différentes clés qu'on a mis de côté
+* Click on `Reveal Config Vars` and enter the various keys you saved.
 
 <p align="center">
 <img src="./assets/img12.png" alt="drawing" width="600"/>
 <p>
 
+Return to the page of the app `fraud-202406`.
 
-Revenir à la page de l'app fraud-202406
-
-* Lancer l'app
-* Y a rien mais au moins ça affiche
+* Launch the app.
+* There’s nothing there, but at least it displays.
 
 <p align="center">
 <img src="./assets/img13.png" alt="drawing" width="600"/>
 <p>
 
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Testing
 
-Allez dans le répertoire `\02_train_code\01_sklearn\01_minimal` pour y lire le fichier ``readme.md``.
+Go to the directory `\02_train_code\01_sklearn\01_minimal` to read the `README.md` file.
