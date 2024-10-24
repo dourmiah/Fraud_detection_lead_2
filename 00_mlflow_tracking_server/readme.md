@@ -1,11 +1,21 @@
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
+# Introduction
+* The aim of the game here is to deploy an MLFlow Tracking Server on Heroku
+* This server will help to track the different versions of our models
+* Some data (train data and artefacts) will be hosted on an AWS S3 disk
+* Other data will be hosted in a PostgreSQL database, also hosted on Heroku
 
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # AWS
+
 We will create a bucket, 2 directories, and a user who will have permissions on them.
 * The first directory `data` will contain the training data.
 * The second directory `artifacts` will receive the artifacts from the training of our various models.
-
 
 ## Create a Bucket on AWS S3
 
