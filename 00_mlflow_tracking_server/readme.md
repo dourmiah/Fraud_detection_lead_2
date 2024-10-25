@@ -247,7 +247,7 @@ Return to the page of the app `fraud-detection-2`.
 <p>
 
 In order to **NOT** send ``README.md`` and ``./00_mlflow_tracking_server/assets`` to Heroku
-1. create a ``.slugignore`` file in the ``./00_mlflow_tracking_server`` directory
+1. Create a ``.slugignore`` file in the ``./00_mlflow_tracking_server`` directory
 1. Add this two lines
 
 ```
@@ -255,12 +255,18 @@ README.md
 assets/
 ```
 
-3. Once this is done push on Heroku
+3. Once this is done push on GitHub and on Heroku
 
 ```
+git add 00_mlflow_tracking_server/
+git commit -m "my message"
 git subtree push --prefix 00_mlflow_tracking_server heroku main
 
 ```
+
+<p align="center">
+<img src="./assets/img137.png" alt="drawing" width="600"/>
+<p>
 
 
 ## What's next ?
