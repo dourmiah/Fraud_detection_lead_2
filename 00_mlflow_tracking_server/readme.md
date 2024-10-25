@@ -255,7 +255,7 @@ README.md
 assets/
 ```
 
-3. Once this is done push on GitHub and on Heroku
+3. Once this is done and if you REALLY want to push on Heroku without pushing first on GitHub you could try the line below but I highly recommend to push on GitHub then on Heroku  
 
 ```
 git add 00_mlflow_tracking_server/
