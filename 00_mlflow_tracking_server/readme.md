@@ -218,7 +218,7 @@ Return to the page of the app `fraud-202406`.
 * Add this line and save the file
 
 ```
-web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT
+web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT s3://fraud-detection-2-bucket/artifacts/
 ```
 
 * In the terminal, make sure you are at the root of the `fraud-detection-2`
