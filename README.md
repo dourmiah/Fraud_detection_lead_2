@@ -1,12 +1,21 @@
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # fraud_detection_2 project 
 
 * This is an updated/extended/expanded version of the first version of the [fraud_detection](https://github.com/40tude/fraud_detection) project
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# Getting re-started
 
-## Getting re-started
+* I'm an happy user of WIN 11 so some steps may slightly defer if you run a Linux based system
+* Open a terminal in a directory where you will create the project directory  
 
-* I'm an happy user of WIN 11 some step may defer if you run a Linux based system
-* Go to a directory where you will create the project directory.  
+## Side Note
+* Below I do not make a fork because I'm not really interested by the future versions of the ``fraud_detection_1``
+* Also, I delete the ``./git`` because, for me, ``fraud_detection_2`` is a brand new adventure
+    * I may be totally wrong in my way of thinking...
+
 
 ```bash
 git clone https://github.com/40tude/fraud_detection.git
@@ -18,10 +27,9 @@ conda activate fraud2
 code .
 ```
 
-
-### Install mypy  
-* From the VSCode terminal  
-* Web = https://mypy.readthedocs.io/en/stable/getting_started.html#strict-mode-and-configuration  
+## Install mypy  
+* From the VSCode integrated terminal  
+* If necessary, take a look at this [documentation](https://mypy.readthedocs.io/en/stable/getting_started.html#strict-mode-and-configuration)  
 
 ```bash
 conda install mypy -y 
@@ -40,19 +48,21 @@ show_error_codes = True
 color_output = True
 ```
 
-### Get the train data
-* Create the directory `./data`  
-* Get a copy of `fraud_test.csv` from here : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
-* And drop it in ``./data``
+## Get the train data
+* Create the directory `./data` at the root of the project  
+* Get a copy of `fraud_test.csv` from this [page](https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l)
+* Drop the ``.csv`` file in ``./data``
 
 ### Miscelaneous
 * Review the contents of `.gitignore`
 
-### First commit on GitHub
+## First commit on GitHub
+* Use graphical option in VSCode or git command in a terminal
 
 
-
-## EDA
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# EDA
 * Go to ``98_EDA`` and open ``eda.ipynb``
 * Open a terminal in VSCode
 
@@ -67,8 +77,18 @@ conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
 
 
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# What's next ?
+* Go to the directory `00_mlflow_tracking_server` to read the `README.md` file.
 
-## About contributions
+
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# About contributions
 This project was developed for personal and educational purposes. Feel free to explore and use it to enhance your own learning in machine learning.
 
 Given the nature of the project, external contributions are not actively sought nor encouraged. However, constructive feedback aimed at improving the project (in terms of speed, accuracy, comprehensiveness, etc.) is welcome. Please note that this project is being created as a hobby and is unlikely to be maintained once my initial goal has been achieved.
