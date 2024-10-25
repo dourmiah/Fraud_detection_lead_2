@@ -191,42 +191,53 @@ Return to the `settings` section of the app `fraud-detection-2`.
 heroku config:set AWS_ACCESS_KEY_ID=AKI...
 heroku config:set AWS_SECRET_ACCESS_KEY=vtL...
 heroku config:set BACKEND_STORE_URI=postgresql://uav...
-
+heroku config:set ARTIFACT_ROOT=s3://fraud-detection-2-bucket/artifacts/
 ```
-* Go back to `fraud-detection-2` web page on Heroku. You should see :
+* The last line is not a secret. It is the path to the `artifacts` directory on the S3 disk.
+* Go back to `fraud-detection-2` web page on Heroku. You should see something similar to :
 
 <p align="center">
 <img src="./assets/img126.png" alt="drawing" width="600"/>
 <p>
 
-Return to the page of the app `fraud-202406`.
-
-* Launch the app.
-* There’s nothing there, but at least it displays.
-
-<p align="center">
-<img src="./assets/img13.png" alt="drawing" width="600"/>
-<p>
 
 
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # Testing
 
-## Procfile
-* In the ``00_mlflow_tracking_server`` create a file named `Procfile`
-* Add this line and save the file
+* So far so good. However, at this point Heroku does'nt know how to launch the app (the MLFlow Tracking server)
+* Below we :
+    1. Create a Procfile which tells Heroku how to launch the app
+    1. Update the content on Heroku
+    1. Launch the MLFlow Tracking Server
+
+
+## Create a Procfile
+* In the ``00_mlflow_tracking_server`` directory create a file named `Procfile`
+* Add the line below and save the file
 
 ```
-web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT s3://fraud-detection-2-bucket/artifacts/
+web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT
 ```
-
-* In the terminal, make sure you are at the root of the `fraud-detection-2`
-* Push the subtree on Heroku
+## Commit on GitHub and Heroku
+* In the VSCode terminal, make sure you are at the root of the `fraud-detection-2`
+    1. Push on GitHub graphically 
+    1. Push the subtree on Heroku using th
 
 ```
 git subtree push --prefix 00_mlflow_tracking_server heroku main
 
 ```
+## Launch MLFlow Tracking Server
+Return to the page of the app `fraud-detection-2`.
 
-Go to the directory `\02_train_code\01_sklearn\01_minimal` to read the `README.md` file.
+* Launch the app.
+* There’s nothing there yet, but at least it displays.
+
+<p align="center">
+<img src="./assets/img135.png" alt="drawing" width="600"/>
+<p>
+
+## What's next ?
+* Go to the directory `\02_train_code\01_sklearn\01_minimal` to read the `README.md` file.
