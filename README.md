@@ -1,8 +1,45 @@
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
-# fraud_detection_2 project 
+# Intro 
 
-* This is an updated/extended/expanded version of the first version of the [fraud_detection](https://github.com/40tude/fraud_detection) project
+* This is an updated/reloaded/extended/expanded version of the first version of the [fraud_detection](https://github.com/40tude/fraud_detection) project
+
+# Objectives
+* At the end of the day, we want to use a model to predict fraudulent payments in real-time and respond appropriately.
+
+<p align="center">
+<img src="./assets/infra01.png" alt="drawing" width="800"/>
+<p>
+
+
+## Some of the ideas/questions :
+1. Create a model to predict fraudulent payment in real-time
+    * We have a training dataset
+    * At this point the "performances" of the model is **NOT** so important
+        * It could even be a dummy model always answering "not fraudulent"
+    * Can we plug a new model easily ?
+        * And make inference with 
+    * How do we monitor model accuracy over time ?
+    * What about if it drift ? 
+        * Again can we plug a new model easily?
+1. Create an infrastructure that ingest real-time payments
+    * What if the number of payments is increased by 10x
+    * How does the infra scale ?
+    * We need to plan to consume data in batches of N transactions to be verified each time.
+        * In fact, making predictions one after the other will be very slow.
+    * For database saving (Store Data below)
+        * Must save all the data received from the Real-time Data producer (via an API)
+        * We should add a “prediction” column with the model inference
+        * Plus a “true value” column to be filled later after verification (if any).
+            * When verification is complete, the additional line is sent to the training set.
+            * This enable us to enrich the model for the next training session
+1. Classify each payment ?
+1. Send the prediction in real-time to a notification center
+    * Send email ?
+
+
+
+
 
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
@@ -57,7 +94,7 @@ color_output = True
 * Review the contents of `.gitignore`
 
 ## First commit on GitHub
-* Use graphical option in VSCode or git command in a terminal
+* Use graphical options from VSCode or git commands in a terminal
 
 
 <!-- ###################################################################### -->
@@ -71,7 +108,7 @@ conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
 ```
 
 * Restart the kernel
-* Approve when VSCode ask to install ??? for Jupyter
+* Approve when VSCode ask to install ipykernel in order to please Python
 * You should be go to go
 * Run All
 
