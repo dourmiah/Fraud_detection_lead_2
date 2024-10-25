@@ -79,17 +79,18 @@ $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
 <!-- ###################################################################### -->
 # Heroku
 
+<!-- ###################################################################### -->
 ## Deploy the MLflow Tracking Server on Heroku with Git
 
 The MLflow Tracking Server on Heroku will :
-* will fetch the training artifacts from the AWS S3 directory we just created.
+* fetch the training data or artifacts from the AWS S3 directory we just created.
 * use a PostgreSQL database (also on Heroku) to store the parameters and tags of each training session.
 
-Take the time to read the content of the `Dockerfile` located next to this `README.md`. You should now understand why ``mlflow`` and ``boto3`` are in the requirement.txt
+Take the time to read the content of the `Dockerfile` located next to this `README.md`. You should now understand why there are instructions like `RUN ./aws/install` and why ``boto3`` is in the ``requirement.txt``. Indeed they help to plug the MLFlow Tracking Server to the bucket on AWS. The connection between the MLFlow Tracking Server and PostgreSQL is a matter of configuration (see the next section below)
 
 To deploy the MLflow tracking server:
 * Open a terminal
-    * Make sure you are at the root of the project directory
+    * Make sure you are at the root of the `fraud-detection-2` project directory
 
     ```
     heroku login
@@ -98,8 +99,13 @@ To deploy the MLflow tracking server:
     * Read the content of the terminal and note that these 2 urls have been created 
         * https://fraud-detection-2-ab95815c7127.herokuapp.com/ 
         * https://git.heroku.com/fraud-detection-2.git
-    * Push the changes of the project to GitHub
-    * Now we add Heroku as a remote (first line below) and we push the sub-directory `./00_mlflow_tracking_server` to Heroku (second line below)
+    
+    * Push the changes of the project ``fraud_detection_2`` to GitHub
+        * This is NOT mandatory but it doesn't hurt
+
+    * Now with the 2 lines below we :
+        1. we add Heroku as a remote  
+        1. we push the sub-directory `./00_mlflow_tracking_server` to Heroku 
 
     ```
     git remote add heroku https://git.heroku.com/fraud-detection-2.git
@@ -120,24 +126,22 @@ To deploy the MLflow tracking server:
 
 
 <!-- ###################################################################### -->
-<!-- ###################################################################### -->
-# SQL Database for the MLflow Tracking Server
+## Connect a SQL Database for the MLflow Tracking Server
 
 On the web page of the app `fraud-detection-2` (on Heroku):
 
-* Click on Resources.
-* Add an add-on.
-* Search for Heroku Postgres.
-* Agree to being charged.
+* Click on Resources
+* Add an add-on
+* Search for Heroku Postgres
+* Agree to being charged
 * Wait...
 
 <p align="center">
 <img src="./assets/img09.png" alt="drawing" width="600"/>
 <p>
 
-* Click on Heroku Postgres.
-* In the page that opens...
-* Click on Settings.
+* Click on Heroku Postgres
+* Click on Settings in the next page
 
 <p align="center">
 <img src="./assets/img10.png" alt="drawing" width="600"/>
@@ -153,7 +157,7 @@ On the web page of the app `fraud-detection-2` (on Heroku):
 $env:AWS_REGION             = "eu-west-3"
 $env:AWS_ACCESS_KEY_ID      = "AKI..."
 $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
-# SQL sur Heroku
+# SQL on Heroku
 $env:BACKEND_STORE_URI      = "postgresql://uav..."
 
 ```
@@ -193,11 +197,11 @@ heroku config:set ARTIFACT_ROOT=s3://fraud-detection-2-bucket/artifacts/
 <!-- ###################################################################### -->
 # Testing
 
-* So far so good. However, at this point Heroku does'nt know how to launch the app (the MLFlow Tracking server)
+* So far so good. However, at this stage Heroku still does'nt know how to launch the app (the MLFlow Tracking server)
 * Below we :
-    1. Create a Procfile which tells Heroku how to launch the app
+    1. Create a Procfile which tells Heroku how to launch the Server
     1. Update the content on Heroku
-    1. Launch the MLFlow Tracking Server
+    1. Launch the MLFlow Tracking Server 
 
 
 ## Create a Procfile
@@ -208,9 +212,10 @@ heroku config:set ARTIFACT_ROOT=s3://fraud-detection-2-bucket/artifacts/
 web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT
 ```
 ## Commit on GitHub and Heroku
-* In the VSCode terminal, make sure you are at the root of the `fraud-detection-2`
-    1. Push on GitHub graphically 
-    1. Push the subtree on Heroku using th
+* Push on GitHub graphically (again it doe'snt hurt)
+* In VSCode, in a terminal 
+    1. make sure you are at the root of the `fraud-detection-2` project
+    1. Push the subtree on Heroku with
 
 ```
 git subtree push --prefix 00_mlflow_tracking_server heroku main
@@ -225,6 +230,38 @@ Return to the page of the app `fraud-detection-2`.
 <p align="center">
 <img src="./assets/img135.png" alt="drawing" width="600"/>
 <p>
+
+
+* While the server is running, one can 
+1. visit the ``fraud-detection-2`` page
+1. click on the `More` button (top right)
+1. Select `Run console`
+1. Type ``bash``
+1. Wait...
+1. Type `ls /app` and check that only the ``./00_mlflow_tracking_server`` has been deployed to Heroku
+    * We could go one step further since it make no sense to transfer :
+        * ``README.md`` and the ``./00_mlflow_tracking_server/assets`` directory (it contains png file for the README)
+
+<p align="center">
+<img src="./assets/img136.png" alt="drawing" width="600"/>
+<p>
+
+In order to **NOT** send ``README.md`` and ``./00_mlflow_tracking_server/assets`` to Heroku
+1. create a ``.slugignore`` file in the ``./00_mlflow_tracking_server`` directory
+1. Add this two lines
+
+```
+README.md
+assets/
+```
+
+3. Once this is done push on Heroku
+
+```
+git subtree push --prefix 00_mlflow_tracking_server heroku main
+
+```
+
 
 ## What's next ?
 * Go to the directory `\02_train_code\01_sklearn\01_minimal` to read the `README.md` file.
