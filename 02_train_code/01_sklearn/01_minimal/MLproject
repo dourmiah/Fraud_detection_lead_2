@@ -1,7 +1,7 @@
 name: fraud_detection 
 
 docker_env:
-  image: sklearn_fraud_trainer
+  image: template_fraud_trainer
   volumes: ["%cd%:/home/app"]
   environment: [ 
       "MLFLOW_TRACKING_URI", 

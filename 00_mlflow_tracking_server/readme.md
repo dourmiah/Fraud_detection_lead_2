@@ -1,7 +1,7 @@
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # Introduction
-* The aim of the game here is to deploy an MLFlow Tracking Server on Heroku
+* The aim of the game here is to deploy an MLflow Tracking Server on Heroku
 * This server will track the different versions of our models
 * Some data (train data and the artifacts) will be hosted on an AWS S3 disk
 * Other data (metrics of the models) will be stored in a PostgreSQL database, also hosted on Heroku
@@ -86,7 +86,7 @@ The MLflow Tracking Server on Heroku will :
 * fetch the training data or artifacts from the AWS S3 directory we just created.
 * use a PostgreSQL database (also on Heroku) to store the parameters and tags of each training session.
 
-Take the time to read the content of the `Dockerfile` located next to this `README.md`. You should now understand why there are instructions like `RUN ./aws/install` and why ``boto3`` is in the ``requirement.txt``. Indeed they help to plug the MLFlow Tracking Server to the bucket on AWS. The connection between the MLFlow Tracking Server and PostgreSQL is a matter of configuration (see the next section below)
+Take the time to read the content of the `Dockerfile` located next to this `README.md`. You should now understand why there are instructions like `RUN ./aws/install` and why ``boto3`` is in the ``requirement.txt``. Indeed they help to plug the MLflow Tracking Server to the bucket on AWS. The connection between the MLflow Tracking Server and PostgreSQL is a matter of configuration (see the next section below)
 
 To deploy the MLflow tracking server:
 * Open a terminal
@@ -197,11 +197,11 @@ heroku config:set ARTIFACT_ROOT=s3://fraud-detection-2-bucket/artifacts/
 <!-- ###################################################################### -->
 # Testing
 
-* So far so good. However, at this stage Heroku still does'nt know how to launch the app (the MLFlow Tracking server)
+* So far so good. However, at this stage Heroku still does'nt know how to launch the app (the MLflow Tracking server)
 * Below we :
     1. Create a Procfile which tells Heroku how to launch the Server
     1. Update the content on Heroku
-    1. Launch the MLFlow Tracking Server 
+    1. Launch the MLflow Tracking Server 
 
 
 ## Create a Procfile
@@ -221,7 +221,7 @@ web: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri $BACKEND_STOR
 git subtree push --prefix 00_mlflow_tracking_server heroku main
 
 ```
-## Launch MLFlow Tracking Server
+## Launch MLflow Tracking Server
 Return to the page of the app `fraud-detection-2`.
 
 * Launch the app.
@@ -248,14 +248,16 @@ Return to the page of the app `fraud-detection-2`.
 
 In order to **NOT** send ``README.md`` and ``./00_mlflow_tracking_server/assets`` to Heroku
 1. Create a ``.slugignore`` file in the ``./00_mlflow_tracking_server`` directory
-1. Add this two lines
+1. Add these lines
 
 ```
 README.md
+readme.md
 assets/
 ```
 
-3. Once this is done and if you REALLY want to push on Heroku without pushing first on GitHub you could try the line below but I highly recommend to push on GitHub then on Heroku  
+3. Once this is done and if you **REALLY** want to push on Heroku without pushing first on GitHub you could try the lines below 
+    * Again I highly recommend to push on GitHub first and then on Heroku  
 
 ```
 git add 00_mlflow_tracking_server/
@@ -268,6 +270,43 @@ git subtree push --prefix 00_mlflow_tracking_server heroku main
 <img src="./assets/img137.png" alt="drawing" width="600"/>
 <p>
 
+This shows that using `.slugignore` can help to reduce the file on Heroku to the strict minimum.
+
+## What could be next ?
+* Replace the web server coming with MLflow Tracking Server?
+* A lite web server based on Flask
+
+### Use gunicorn as a web server
+* Already done within another project ([py-flashcards](https://github.com/40tude/py-flashcards))
+* Unlike Nginx (see below), Gunicorn doesn't require any additional configuration to redirect HTTP requests to MLflow. It handles this directly.
+* Add it to `requirements.txt` 
+* New Procfile
+
+```
+web: gunicorn -w 3 -b 0.0.0.0:$PORT "mlflow.server:app"
+
+```
+
+* ``--backend-store-uri $BACKEND_STORE_URI`` and `` --default-artifact-root $ARTIFACT_ROOT`` are no longer needed
+* Might be a good idea (later)
+
+<!-- 
+Vérifier/Essayer  un truc du style
+Nb_Workers = (2 x CPU) + 1
+gunicorn -w 4 --timeout 120 -b 0.0.0.0:$PORT "mlflow.server:app"
+web: gunicorn --workers=3 'mlflow.server:create_app()' 
+-->
+
+
+### Use Nginx as a web server 
+* Harder
+* Need to add Nginx in `requirements.txt` 
+* Need a new Procfile
+```
+web: nginx -c /app/web_app/nginx.conf && mlflow server --host 127.0.0.1 --port 5000 --backend-store-uri $BACKEND_STORE_URI --default-artifact-root $ARTIFACT_ROOT
+
+```
+* Not sure it's worth it
 
 ## What's next ?
 * Go to the directory `\02_train_code\01_sklearn\01_minimal` to read the `README.md` file.
