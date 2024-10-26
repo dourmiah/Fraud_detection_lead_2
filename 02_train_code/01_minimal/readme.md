@@ -79,7 +79,7 @@ The most interesting part of the previous recipe is found in the ``01_images_for
 
 If later, a training Python script requires other libraries (sklearn...), simply add them to the ``requirements.txt`` file.
 * If you modify the ``requirements.txt`` file then you **must** rebuild the Docker image using the script `build_fraud_trainer.ps1`.
-* If you want to give the Docker image a new name, modify it in ``build_sklearn_fraud_trainer.ps1``.
+* If you want to give the Docker image a new name, modify it in ``build_fraud_trainer.ps1``.
     * For example, if instead of `template_fraud_trainer` you prefer `minimal_trainer` modify the code as shown below (and don't forget the `.` at the end of the line)
 
 ```
