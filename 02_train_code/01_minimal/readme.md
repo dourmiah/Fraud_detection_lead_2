@@ -10,7 +10,7 @@
 In the following steps, we will:
 1. Build a minimal Docker image. This image will offer a context in which a minimal training Python script can be executed.
 2. Run a minimal training Python script (20 lines) within the Docker image.
-3. The Docker image and the training script run locally. However, results are sent to the MLflow Tracking Server and artifacts are be stored in the ``./artifacts`` directory on the AWS S3 bucket (check now the very end of this document)
+3. The Docker image and the training script run locally. However, results are sent to the MLflow Tracking Server and artifacts are stored in the ``./artifacts`` directory on the AWS S3 bucket (check now the very end of this document)
 
 
 
