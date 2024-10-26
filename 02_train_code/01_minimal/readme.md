@@ -154,7 +154,7 @@ $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
 
 * The training Python script doesn'nt really care about the PostgreSQL database. 
     * Indeed once it sends the metrics to the MLflow Tracking Server, the later will get in touch with the database and store the metrics.
-    * This explain why this version of `secrets.ps1` has no information about PostgreSQL will the other instance of `secrets.ps1` had a line specific to PostgreSQL (`$env:BACKEND_STORE_URI      = "postgresql://uav...`)
+    * This explain why this version of `secrets.ps1` has no information about PostgreSQL while the other instance of `secrets.ps1` had a line specific to PostgreSQL (`$env:BACKEND_STORE_URI      = "postgresql://uav...`)
 * This `secrets.ps1` is in the directory of the experiment because it is experiment specifi. Indeed, it contains the name of the experiment. 
     * If one copy/paste/rename the ``01_minimal`` directory and build a more sophisticated training Python script he should change the name of the experiment in the local copy of `secrets.ps1`
 
