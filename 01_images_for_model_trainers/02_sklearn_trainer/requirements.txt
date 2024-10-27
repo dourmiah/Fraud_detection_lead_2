@@ -10,7 +10,7 @@ psycopg2-binary     # connection to PostgreSQL
 # fsspec              # to read s3://fraud-bucket-202406/data/validated.csv
 # s3fs                # to read s3://fraud-bucket-202406/data/validated.csv
 seaborn             
-imbalanced-learn    # for the sklearn train.py template
+imbalanced-learn      # for the sklearn train.py template
 
 
 

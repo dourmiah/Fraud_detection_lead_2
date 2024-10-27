@@ -6,6 +6,7 @@ import sklearn
 import logging
 import datetime
 
+# from typing import Tuple Not needed since we use 3.12
 # import argparse
 import pandas as pd
 import logging.config
@@ -49,12 +50,23 @@ class ModelTrainer:
     # -----------------------------------------------------------------------------
     def load_data(self) -> pd.DataFrame:
         start_time = time.time()
+        # data_train = pd.read_csv(
+        #     "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv", nrows=10_000
+        # )
         # The URL to use is listed on this page : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
+        # data = pd.read_csv("https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv")
         data = pd.read_csv(
             # 60 sec vs 1H40 when all rows are taken into account
             "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv",
             nrows=5_000,
         )
+        # for local test only
+        # data = pd.read_csv("../../../data/fraud_test.csv", nrows=10_000)
+
+        # TODO
+        # data_validated = pd.read_csv("s3://fraud-bucket-202406/data/validated.csv")
+        # data = pd.concat([data_train, data_validated], ignore_index=True)
+        # logger.debug(f"Nb lines dataset : {len(data)}")
 
         # remove first col
         data = data.iloc[:, 1:]
@@ -64,14 +76,25 @@ class ModelTrainer:
         return data
 
     # -----------------------------------------------------------------------------
+    # def preprocess_data(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]: # before 3.9
     def preprocess_data(self, df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
         start_time = time.time()
         X = df.drop("is_fraud", axis=1)
         y = df["is_fraud"]
 
+        # ! Je n'y arrive pas
+        # J'essaie d'éviter le message : /opt/conda/lib/python3.12/site-packages/mlflow/types/utils.py:406: UserWarning: Hint: Inferred schema contains integer column(s).
+        # Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will
+        # cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset)
+        # that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values.
+        # See `Handling Integers With Missing Values <https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values>`_ for more details.
+        # numeric_features = X.select_dtypes(include="number").columns
+        # X[numeric_features] = X[numeric_features].astype(float)
+
         self.numeric_columns = X.select_dtypes(include="number").columns
         logger.debug(f"X numeric cols : {self.numeric_columns}")
 
+        # shuffle est à true par défaut
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
         mlflow.log_param("Train set size", len(X_train))
@@ -85,7 +108,7 @@ class ModelTrainer:
     def train_model(self, X_train: pd.DataFrame, y_train: pd.Series) -> ImbPipeline:
         start_time = time.time()
 
-        # SMOTE + RandomForest in a pipeline
+        # SMOTE + RandomForest dans un pipeline
         model_pipeline: ImbPipeline = ImbPipeline(
             steps=[
                 ("scaler", StandardScaler()),
@@ -136,6 +159,21 @@ class ModelTrainer:
         logger.info(f"Rappel : {recall:.2f}")
         logger.info(f"F1-Score : {f1:.2f}")
         logger.info(f"ROC AUC Score : {roc_auc:.2f}")
+
+        # Je veux vérifier et comparer ces valeurs avec celles ci-dessus
+        tn, fp, fn, tp = conf_matrix.ravel()
+        recall1 = tp / (tp + fn)
+        precision1 = tp / (tp + fp)
+        f1_score1 = 2 * (precision1 * recall1) / (precision1 + recall1)
+        false_negative_rate1 = fn / (fn + tp)
+        roc_auc1 = roc_auc_score(y_test, y_pred)
+
+        logger.info(f"recall1 : {recall1:.2f}")
+        logger.info(f"precision1 : {precision1:.2f}")
+        logger.info(f"f1_score1 : {f1_score1:.2f}")
+        logger.info(f"false_negative_rate1 : {false_negative_rate1:.2f}")
+        logger.info(f"roc_auc1 : {roc_auc1:.2f}")
+        mlflow.log_metric("false_neg_rate", round(false_negative_rate1, 2))
 
         fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
         plt.figure()
@@ -231,14 +269,15 @@ if __name__ == "__main__":
 
     current_file = Path(__file__).resolve()
     current_directory = current_file.parent
-    os.chdir(current_directory)
 
+    os.chdir(current_directory)
     # Load the logging configuration from the conf file
     logging.config.fileConfig("logging.conf")
     logger = logging.getLogger(__name__)
 
     logger.debug(f"Current dir : {current_directory}")
 
+    # os.makedirs("./img", exist_ok=True)
     Path("./img").mkdir(parents=True, exist_ok=True)
 
     logger.info(f"Training started")
