@@ -69,6 +69,11 @@ $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
 ## Copy fraud data to the bucket
 
 
+## Penser à installer
+conda import imbalanced-learn en local
+pour eviter le soucis de type hints avec ImbPipeline lors de la relecture en local
+
+
 
 
 
