@@ -8,7 +8,6 @@ import datetime
 
 # import argparse
 import pandas as pd
-import seaborn as sns
 import logging.config
 import seaborn as sns  # conda install seaborn
 from pathlib import Path
@@ -49,17 +48,18 @@ class ModelTrainer:
     # -----------------------------------------------------------------------------
     def load_data(self):
         start_time = time.time()
-        data_train = pd.read_csv(
-            "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv", nrows=10_000
-        )
-        # data = pd.read_csv("https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv")
+        # data_train = pd.read_csv(
+        #     "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv", nrows=10_000
+        # )
+        # The URL to use is listed on this page : https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l
+        data = pd.read_csv("https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv")
         # for local test only
         # data = pd.read_csv("../../../data/fraud_test.csv", nrows=10_000)
 
-        data_validated = pd.read_csv("s3://fraud-bucket-202406/data/validated.csv")
-
-        data = pd.concat([data_train, data_validated], ignore_index=True)
-        logger.debug(f"Nb lines dataset : {len(data)}")
+        # TODO
+        # data_validated = pd.read_csv("s3://fraud-bucket-202406/data/validated.csv")
+        # data = pd.concat([data_train, data_validated], ignore_index=True)
+        # logger.debug(f"Nb lines dataset : {len(data)}")
 
         # remove first col
         data = data.iloc[:, 1:]

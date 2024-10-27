@@ -1,4 +1,184 @@
-# Faire tourner un code de training qui utilise sklearn
+# Running a Training Script with Sklearn
+
+This guide covers setting up a training environment using Sklearn, though similar steps would apply if using TensorFlow. Generally, you will need to:
+
+1. Build a Docker image containing Sklearn and any additional libraries required to run the training code, `train.py`.
+2. Develop training code that:
+    * Fetches data from an S3 server,
+    * Defines a model,
+    * Trains the model on a training dataset,
+    * Makes predictions on a test dataset,
+    * Calculates various metrics,
+    * Logs model parameters, metrics, and tags to an MLflow tracking server hosted on Heroku,
+    * Stores training artifacts on AWS S3.
+
+
+
+
+## Adapting and Building the Docker Image
+* Copy `01_images_for_model_trainers/01_minimal_trainer`.
+* Paste and rename it to `01_images_for_model_trainers/02_sklearn_trainer`
+* Edit ``build_fraud_trainer.ps1`` to change the name of the Docker image to be created :
+
+```
+docker build -t sklearn_fraud_trainer .
+```
+* Modify the `requirements.txt` file as specified below.
+
+
+<p align="center">
+<img src="./assets/img19.png" alt="drawing" width="600"/>
+<p>
+
+* Run `.\build_fraud_trainer.ps1`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Create a secrets.ps1 file
+
+* Add it to `02_train_code\02_sklearn\01_template`
+* Make sure to update ``MLFLOW_EXPERIMENT_NAME``
+
+```
+$currentDate = Get-Date -Format "yyyyMMdd"
+$env:MLFLOW_EXPERIMENT_NAME = "sklearn-$currentDate"
+
+$env:MLFLOW_TRACKING_URI    = "https://fraud-detection-2-ab95815c7127.herokuapp.com/"
+$env:AWS_ACCESS_KEY_ID      = "AKI..."
+$env:AWS_SECRET_ACCESS_KEY  = "vtL..."
+
+```
+
+
+
+
+## Copy fraud data to the bucket
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Model Training Code
+* For demonstration, we’ll use a model based on SMOTE and RandomForest.
+* The code fetches data from an S3 storage,
+* Stores parameters and results on the MLflow tracking server,
+* Saves the model and training artifacts on S3:
+    * Including all model parameters,
+    * Saves a confusion matrix and ROC AUC curve as `.png` images,
+    * Creates local copies of images in a subdirectory `./img`,
+        * Each image is timestamped.
+* The code also sets up a logging mechanism.
+* Optionally, you can configure various parameters.
+* The code is:
+    * Well-commented,
+    * Object-oriented,
+    * About 250 lines long,
+    * A `ModelTrainer` class instance is created, and the `run()` method is called.
+
+To run the code:
+* Navigate to the `02_train_code/01_sklearn/02_template` directory.
+* It may be helpful to specify the experiment name in the `secrets.ps1` file to organize your training runs. The experiment name can be found at the top left of the MLflow tracking server’s web page.
+* If you renamed the Docker image for `train.py`, update it in the `MLproject` file.
+* Once everything is set up, run `./run_training.ps1`.
+
+After training, you can review the parameters, tags, and results (metrics) on the MLflow tracking server.
+
+<p align="center">
+<img src="./assets/img20.png" alt="drawing" width="600"/>
+<p>
+
+You’ll also find the training artifacts:
+
+<p align="center">
+<img src="./assets/img21.png" alt="drawing" width="600"/>
+<p>
+
+In addition to inference information, graphs are also available as artifacts:
+
+<p align="center">
+<img src="./assets/img22.png" alt="drawing" width="600"/>
+<p>
+
+If needed, the local directory includes a log file, and the `./img` folder contains copies of the `.png` images.
+
+<p align="center">
+<img src="./assets/img23.png" alt="drawing" width="600"/>
+<p>
+
+## How to Create Your Own Training Code
+
+1. Duplicate the `02_train_code/01_sklearn/02_template` directory.
+2. Delete the `./assets` directory.
+3. Delete the `./img` directory.
+4. Delete this `readme.md` file.
+5. Delete the `train.log` file.
+6. Ensure the `MLproject` file:
+    * Specifies the image in which `train.py` should run,
+    * Configures the `parameters` section if `train.py` will accept parameters (currently commented).
+7. In the `secrets.ps1` file, adjust the `MLFLOW_EXPERIMENT_NAME` variable.
+8. Modify `train.py`:
+    * Start by editing the `train_model()` method to integrate a different model into the pipeline.
+        * The core of this method is a pipeline that includes the model,
+        * It’s followed by a `.fit()` call,
+        * Code surrounding these lines measures execution time. For now, do not modify this section.
+        * Execution time is logged in the log file and as a training metric on the MLflow tracking server.
+    
+```python
+def train_model(self, X_train, y_train):
+
+    start_time = time.time()
+
+    # SMOTE + RandomForest
+    pipeline = imbpipeline(
+        steps=[
+            ("scaler", StandardScaler()),
+            ("smote", SMOTE(random_state=42)),
+            (
+                "classifier",
+                RandomForestClassifier(n_estimators=k_N_Estimators, random_state=42, class_weight="balanced"),
+            ),
+        ]
+    )
+
+    pipeline.fit(X_train[self.numeric_columns], y_train)
+
+    mlflow.log_metric("train_model_time", round(time.time() - start_time, 2))
+    logger.info(f"train_model : {round(time.time() - start_time, 2)} sec.")
+    return pipeline
+```
+    
+Next steps:
+* If your model uses parameter values (`n_estimators`, `C`, `gamma`, etc.), you can:
+    1. Declare these as constants at the top of the source code, like `k_N_Estimators = 100`,
+    2. Log these parameters in the `log_tags_and_parameters()` method. See this example: `mlflow.log_param("N Estimators", k_N_Estimators)`.
+* If your training requires additional tags, follow the same approach:
+    1. Define the constant at the start of the source code,
+    2. Save the tag in the `log_tags_and_parameters()` method,
+    3. For example, update `k_Author` with your own name.
+
+<!-- # Faire tourner un code de training qui utilise sklearn
 
 On parle ici de sklearn, la méthode serait la même si on souhaitait utiliser TensorFlow. Dans tous les cas, il va falloir :
 
@@ -129,7 +309,7 @@ Dans un seconde temps :
     1. Par exemple, pensez à metre à jour ``k_Author`` avec votre propre nom
 
 
-
+ -->
 
 
 
