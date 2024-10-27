@@ -1,3 +1,5 @@
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Creating and Running a Training Script with Sklearn
 
 This guide covers setting up a training environment using Sklearn, though similar steps would apply if using TensorFlow. Generally, you will need to:
@@ -8,8 +10,9 @@ This guide covers setting up a training environment using Sklearn, though simila
 
 
 
-
-## 1. Build a Docker image
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# 1. Build a Docker image
 * Copy `01_images_for_model_trainers/01_minimal_trainer`.
 * Paste and rename it to `01_images_for_model_trainers/02_sklearn_trainer`
 * Edit the PowerShell script ``build_fraud_trainer.ps1`` and change the name of the Docker image to be created
@@ -38,10 +41,14 @@ docker image ls sk*     # sklearn_fraud_trainer should be listed
 ```
 
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# 2. Develop the training code
 
-## 2. Develop the training code
 
-### 1. Duplicate the template directory
+
+<!-- ###################################################################### -->
+## 1. Duplicate the template directory
 
 1. Duplicate the `02_train_code/01_sklearn/02_template` directory.
 1. Open a terminal in the new directory 
@@ -55,7 +62,13 @@ The `create_fresh_project.ps1` utility script, clean the directory if necessary 
    1. Delete this `readme.md` file.
    1. Delete the `train.log` file.
 
-### Edit/Create the ``secrets.ps1`` file
+Once `create_fresh_project.ps1` has been used it can be deleted.
+
+
+
+
+<!-- ###################################################################### -->
+## 2. Edit/Create the ``secrets.ps1`` file
 
 * See below
     * `$env:AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` : These values are those already used in previous versions of ``secrets.ps1``
@@ -72,7 +85,11 @@ $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
 
 ```
 
-### Edit the `MLproject` file
+
+
+
+<!-- ###################################################################### -->
+### 3. Edit the `MLproject` file
 * **IMPORTANT :** Specifies the image in which `train.py` should run,
 * If needed, you pass `parameters` to the training code `train.py`. See the end of the MLproject file which is currently commented. `train.py` will need to import `argparse`
 
@@ -95,15 +112,15 @@ entry_points:
     command: "python train.py" 
 ```
 
-
-### Run the template training code
+<!-- ###################################################################### -->
+## 4. Run the template training code
 
 Open a terminal
 
 ```
 .\run_training.ps1
 ```
-* Expect to wait 60 seconds.
+* Expect to wait a minute or so.
 * There is nothing magic. The code get the train data from a JEDHA's bucket with public access. We will put data on the project's bucket later.
 * After the training, the MLflow tracking server can display the parameters, tags, and results (metrics)
 
@@ -137,8 +154,8 @@ If needed, the local directory includes a ``train.log`` file, and the `./img` fo
 At this point you have a solid base to develop your own ``train.py`` with your own model etc.
 
 
-
-### Own the source code of ``train.py``
+<!-- ###################################################################### -->
+## 5. Own the source code of ``train.py``
 
 #### Quick recap of what the baseline code do
 * For the demonstration, the model is based on SMOTE and RandomForest.
@@ -157,7 +174,9 @@ At this point you have a solid base to develop your own ``train.py`` with your o
     * Object-oriented,
     * About 250 lines long,
 
-#### High level point of view
+
+
+### High level point of view
 
 Here's how the code looks when you avoid getting bogged down in details.
 
@@ -216,7 +235,7 @@ In plain English this means :
 
 
 
-#### Modify `train.py`:
+### Modify `train.py`
 
 The methods of the class are based on the same pattern :
 
@@ -283,13 +302,21 @@ def train_model(self, X_train: pd.DataFrame, y_train: pd.Series) -> ImbPipeline:
 * The method return the fitted model_pipeline 
 
 
-#### My recommendation
+### My recommendation
 * Even if the code of ``train.py`` is executed in a Docker image, it might smart to install in the local Python virtual environment the libraries required by mypy in order to check the datatypes effectively
 * For example in order to support the type `ImbPipeline` I had to install ``imbalanced-learn``
 
 ```bash
 conda install imbalanced-learn
 ```
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# What's next ?
+<!-- * Go to the directory `00_mlflow_tracking_server` and read the `README.md` file. -->
+
+
 
 <!-- 
 Next steps:
