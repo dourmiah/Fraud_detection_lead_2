@@ -10,7 +10,7 @@
 In the following steps, we will:
 1. Build a minimal Docker image. This image will offer a context in which a minimal training Python script can be executed.
 2. Run a minimal training Python script (20 lines) within the Docker image.
-3. The Docker image and the training script run locally. However, results are sent to the MLflow Tracking Server and artifacts are be stored in the ``./artifacts`` directory on the AWS S3 bucket (check now the very end of this document)
+3. The Docker image and the training script run locally. However, results are sent to the MLflow Tracking Server and artifacts are stored in the ``./artifacts`` directory on the AWS S3 bucket (check now the very end of this document)
 
 
 
@@ -79,7 +79,7 @@ The most interesting part of the previous recipe is found in the ``01_images_for
 
 If later, a training Python script requires other libraries (sklearn...), simply add them to the ``requirements.txt`` file.
 * If you modify the ``requirements.txt`` file then you **must** rebuild the Docker image using the script `build_fraud_trainer.ps1`.
-* If you want to give the Docker image a new name, modify it in ``build_sklearn_fraud_trainer.ps1``.
+* If you want to give the Docker image a new name, modify it in ``build_fraud_trainer.ps1``.
     * For example, if instead of `template_fraud_trainer` you prefer `minimal_trainer` modify the code as shown below (and don't forget the `.` at the end of the line)
 
 ```
@@ -154,7 +154,7 @@ $env:AWS_SECRET_ACCESS_KEY  = "vtL..."
 
 * The training Python script doesn'nt really care about the PostgreSQL database. 
     * Indeed once it sends the metrics to the MLflow Tracking Server, the later will get in touch with the database and store the metrics.
-    * This explain why this version of `secrets.ps1` has no information about PostgreSQL will the other instance of `secrets.ps1` had a line specific to PostgreSQL (`$env:BACKEND_STORE_URI      = "postgresql://uav...`)
+    * This explain why this version of `secrets.ps1` has no information about PostgreSQL while the other instance of `secrets.ps1` had a line specific to PostgreSQL (`$env:BACKEND_STORE_URI      = "postgresql://uav...`)
 * This `secrets.ps1` is in the directory of the experiment because it is experiment specifi. Indeed, it contains the name of the experiment. 
     * If one copy/paste/rename the ``01_minimal`` directory and build a more sophisticated training Python script he should change the name of the experiment in the local copy of `secrets.ps1`
 
