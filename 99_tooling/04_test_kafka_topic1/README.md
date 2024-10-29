@@ -12,4 +12,4 @@
 
 ### Note
 * Plutôt que de lancer 2 terminaux on peut imaginer de lancer les code en tâche de fond dans l'image confluent 
-* On doit même être capable de scripter tout ça  histoire que tout soit automatiser et qu'on ai plus à s'en occuper
+* On doit même être capable de scripter tout ça  histoire que tout soit automatisé et qu'on ai plus à s'en occuper

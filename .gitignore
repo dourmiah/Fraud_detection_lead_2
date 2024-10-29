@@ -1,15 +1,13 @@
 # files to ignore
 secrets.ps1
-__pycache__/
-.mypy_cache/
-
 # *.log
 
 # directories to ignore
-data/
-.vscode/
 .git/
+.vscode/
+.mypy_cache/
 __pycache__/
+data/
 
 # Large files Size > 100MB (warning at 50MB)
 # No way to specify the size in .gitignore
