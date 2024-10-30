@@ -1,5 +1,5 @@
 # Colonnes du fichier fraud_test.csv
-#          ,trans_date_trans_time  ,cc_num          ,merchant               ,category       ,amt   ,first   ,last    ,gender  ,street             ,city      ,state  ,zip  ,lat      ,long     ,city_pop   ,job                ,dob         ,trans_num                         ,unix_time   ,merch_lat  ,merch_long   ,is_fraud
+# vide         ,trans_date_trans_time  ,cc_num          ,merchant               ,category       ,amt   ,first   ,last    ,gender  ,street             ,city      ,state  ,zip  ,lat      ,long     ,city_pop   ,job                ,dob         ,trans_num                         ,unix_time   ,merch_lat  ,merch_long   ,is_fraud
 # 0        ,2020-06-21 12:14:25    ,2291163933867244,fraud_Kirlin and Sons  ,personal_care  ,2.86  ,Jeff    ,Elliott ,M       ,351 Darlene Green  ,Columbia  ,SC     ,29209,33.9659  ,-80.9355 ,333497     ,Mechanical engineer,1968-03-19  ,2da90c7d74bd46a0caf3777415b3ebd3  ,1371816865  ,33.986391  ,-81.200714   ,0
 
 
