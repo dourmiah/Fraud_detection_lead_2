@@ -1,5 +1,6 @@
 # files to ignore
 secrets.ps1
+.env
 # *.log
 
 # directories to ignore

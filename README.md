@@ -1,3 +1,56 @@
+<!-- 
+TO DO list
+
+* Jeu de données
+    * Clean
+    * Missing val, outliers, balancing
+    * Feature enginieering 
+    * Demonstration ?
+
+* Entrainement du modèle
+    * Choisir un algo
+    * Choisir un framework
+    * Tune hyper parameters
+    * Evaluate model (F1, accuracy, precision, recall)
+    * Demonstration 
+        * MLflow tracking
+        * QUESTION : Testing ?
+        * QUESTION : Versioning. Comment on fait ?
+
+
+* Faire tourner l'ensemble de l'application
+    * Acquerir les données & sauver dans topic 1 :                  Docker 1 + Confluent + API Data producer
+    * Lire topic 1, demander une prévision, stocker dans topic 2    Docker 2 + Confluent + MLflow
+    * Lire dans topic 2 et sauver dans PostgreSQL                   Docker 3 + ??? RDS ou Heroku ?
+
+
+
+
+* MLOps
+    * Trigger = model updated
+        * Automatiser le testing
+        * Automatiser la validation
+        * Automatiser le déploiement
+    * Evidently
+        * Suivre metrics (latency, accuracy, drift)
+        * S'assurer que le modèle reste dans les specs
+        * Envoyer une alerte si drift ou accuracy sous une certains niveau
+    * Pipelin de ré-entrainement 
+        * Trigger = perf en baisse
+        * Trigger = new data available
+        * Airflow
+    * Rollback
+        * MLFlow
+        * Data & Model versioning
+        * Démontrer le roll back
+    * API
+        * Fast API
+        * Demontrer l'interaction avec le modèle
+        * Assurer la documentation
+
+
+-->
+
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # Intro 

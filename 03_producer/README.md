@@ -7,10 +7,11 @@ In the [fraud_detection_2 project](https://github.com/40tude/fraud_detection_2),
 <p>
 
 
-This document covers three topics :
+This document covers 4 topics :
 1. Design: Architecture and operation of the ``Consume Data`` block.
 1. Design: The format of documents exchanged at the various interfaces of the `fraud_detection_2` application.  
 1. Technical: Implementation of a Kafka Topic in `fraud_detection_2`.
+1. Technical: Running the producer of the `fraud_detection_2` application
 
 
 
@@ -156,7 +157,7 @@ We're interested in the topic in which a producer will deposit simulated banking
 
 ## Create a topic
 
-* Connect to the [Confluent] site(https://confluent.cloud/home) 
+* Connect to the [Confluent](https://confluent.cloud/home) 
 * Add a cluster
 
 <p align="center">
@@ -223,11 +224,13 @@ $env:SASL_PASSWORD = "zBV..."
 
 
 
-## Create a producer
+# 4. Running the producer of the `fraud_detection_2` application
+
+## Configure client application access
 
 * This is a Python code that retrieves simulated bank transactions from the "Real-time Data producer" and deposits them in ``topic_1``. 
 * It produces data insofar as it deposits them in the topic
-* This code must have the credentials to access ``topic_1``.
+* This code must have the credentials to access ``topic_1`` this is why we need to go back to the Confluent web page
 
 <p align="center">
 <img src="./assets/img065.png" alt="drawing" width="600"/>
@@ -361,3 +364,8 @@ k_Topic = "topic_1"
 k_Client_Prop = "client.properties"
 k_RT_Data_Producer = "https://real-time-payments-api.herokuapp.com/current-transactions"
 ```
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# What's next ?
+Go to the directory `03_consumer` and read the `README.md` file. 

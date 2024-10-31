@@ -1,0 +1,1 @@
+docker build -t my_confluent_img -f docker/Dockerfile .
