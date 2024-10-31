@@ -3,6 +3,9 @@
 * Comme le docker file de l'image de Jedha est pas dispo (merci les gars)
 * Je repars de 0 et j'essaie de découvrir les lib à installer
 
+File Explorer
+Aller dans le répertoire cd .....fraud_detection_2\99_tooling\08_producer_no_docker
+conda activate conda activate producer_nodocker
 F5
 Exception
 ./secrets.ps1 dans la console de Debug
