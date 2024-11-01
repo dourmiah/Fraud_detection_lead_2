@@ -43,9 +43,9 @@ docker-compose stop app1
 
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
-# Consumer
+# Consumer - Still under construction
 
-Make sur you read the [producer](../03_producer/README.md) readme file first.
+Make sure you read the [producer](../03_producer/README.md) readme file first.
 
 
 
