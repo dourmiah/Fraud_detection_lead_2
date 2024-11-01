@@ -335,7 +335,7 @@ python test_producer02.py
 
 
 <!-- ###################################################################### -->
-## It's a kind of magic...
+## It's a kind of magic (remember 1986 ?)
 The aim here is to explain how the producer starts up and how the Confluent API's ``Key'' and ``Secret'' pass from PowerShell to Linux.
 
 ### The `run_confluent_image.ps1` script

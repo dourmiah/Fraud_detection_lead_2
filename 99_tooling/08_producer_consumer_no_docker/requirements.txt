@@ -5,3 +5,5 @@ pandas
 # librdkafka
 confluent_kafka 
 avro-python3
+mlflow
+boto3

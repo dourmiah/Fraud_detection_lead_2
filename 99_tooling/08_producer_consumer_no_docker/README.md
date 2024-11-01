@@ -1,3 +1,5 @@
+# producer
+
 * j'ai besoin de faire ma propre image Docker qui permet d'exécuter du code qui utilise des topics 
 * J'arrive pas à utiliser celle de Jedha
 * Comme le docker file de l'image de Jedha est pas dispo (merci les gars)
@@ -29,3 +31,30 @@ pip install confluent_kafka  avro-python3
 ```bash
 pip list --format=freeze >> ./requirements.txt
 ```
+
+
+# Pour le consumer
+conda create --name consumer_nodocker --clone producer_nodocker
+conda activate consumer_nodocker
+
+Modification du code source du consumer pour lire topic_1 et faire faire une prédiction
+
+conda install mlflow
+conda installboto3 
+conda install imbalanced-learn
+
+    * mlflow est plutot GROS
+    * Faudra s'assurer d'installer AWS sur l'image
+
+Ajout de l'envoi de mails
+    * Surtout pour vérifier si faut installer d'autres lib
+    * https://myaccount.google.com/apppasswords
+    * Ajout du dataframe en CSV en PJ
+
+
+
+
+# TODO
+* Revoir load_MLflow_model
+* k_Experiments = "sklearn-20241027"
+    * Faut arriver à trouver la dernière expérimentation

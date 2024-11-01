@@ -1,4 +1,5 @@
 #
+# ! conda activate producer_nodocker
 # ! Read the README.md
 
 import time
@@ -9,6 +10,9 @@ import pandas as pd
 from datetime import datetime, timezone
 from confluent_kafka import Producer, Message
 
+# Quand un message est produit avec une clé, Kafka utilise cette clé pour appliquer une fonction de hachage et déterminer la partition.
+# Tous les messages avec la même clé sont envoyés dans la même partition, ce qui garantit leur ordre à l'intérieur de cette partition.
+k_Key = "dummy"
 k_Topic = "topic_1"
 k_Client_Prop = "client.properties"
 k_RT_Data_Producer = "https://real-time-payments-api.herokuapp.com/current-transactions"
@@ -73,7 +77,7 @@ def fetch_and_store() -> None:
             data = {"columns": df.columns.tolist(), "index": df.index.tolist(), "data": df.values.tolist()}
 
             # Convertit le dictionnaire data en JSON et encode en UTF-8
-            producer.produce(k_Topic, key="dummy", value=json.dumps(data).encode("utf-8"), on_delivery=acked)
+            producer.produce(k_Topic, key=k_Key, value=json.dumps(data).encode("utf-8"), on_delivery=acked)
             print(f"Data sent:\n {data}\n\n", flush=True)
         except requests.RequestException as e:
             print(f"Request error: {e}", flush=True)
