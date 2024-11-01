@@ -1,6 +1,6 @@
 services:
   producer:
-    image: my_confluent_img
+    image: producer_img
     build: /docker
     container_name: producer
     environment:

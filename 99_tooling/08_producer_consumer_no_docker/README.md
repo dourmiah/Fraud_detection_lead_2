@@ -40,7 +40,7 @@ conda activate consumer_nodocker
 Modification du code source du consumer pour lire topic_1 et faire faire une prédiction
 
 conda install mlflow
-conda installboto3 
+conda install boto3 
 conda install imbalanced-learn
 
     * mlflow est plutot GROS
@@ -55,6 +55,6 @@ Ajout de l'envoi de mails
 
 
 # TODO
-* Revoir load_MLflow_model
+* ~~Revoir load_MLflow_model~~
 * k_Experiments = "sklearn-20241027"
     * Faut arriver à trouver la dernière expérimentation
