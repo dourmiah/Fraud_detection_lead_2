@@ -1,5 +1,12 @@
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
+# Producer
+
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Introduction
 
 In the [fraud_detection_2 project](https://github.com/40tude/fraud_detection_2), the ``Consume Data`` block, the yellow rectangle, is positioned between the "real-time" data producer and MLflow.
@@ -13,7 +20,7 @@ This document covers 4 topics :
 1. Design: Architecture and operation of the ``Consume Data`` block.
 1. Design: The format of documents exchanged at the various interfaces of the `fraud_detection_2` application.  
 1. Technical: Implementation of a Kafka Topic in `fraud_detection_2`.
-1. Technical: Running the producer of the `fraud_detection_2` application
+1. Technical: Testing a first version of a producer for the `fraud_detection_2` application
 
 
 

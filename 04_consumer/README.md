@@ -38,18 +38,155 @@ docker-compose stop app1
 
  -->
 
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Consumer
 
-Make sur your read the [producer](../03_producer/README.md) readme file first.
+Make sur you read the [producer](../03_producer/README.md) readme file first.
 
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Introduction
 
 This document covers :
-1. Technical: Implementation of a Kafka Topic in `fraud_detection_2`.
-1. Technical: Running the producer of the `fraud_detection_2` application
+1. Create our own Docker image to run Pyton scripts that can read ``topic_1``
+1. Testing a first version of a consumer for the `fraud_detection_2` application
+
+<!-- 1. Add to the Docker image what is needed to make inferences
+1. Technical: Implementation of a Kafka Topic in `fraud_detection_2`. -->
 
 
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# Create our own Docker image to run Pyton scripts that can read ``topic_1``
+
+After running a first version of the producer in the `jedha/confluent-image` image, rather than launching the `test_producer02.py` application from the Linux prompt I tried, without success, to automate its launch.
+
+After several attempts, the decision was made to create a Docker image using the following method:
+1. Creating a minimal conda virtual environment using only Python 3.12
+1. Create a directory and copy the files needed to run `test_producer02.py` (``secrets.ps1``, ``client.properties``...)
+1. Add modules required for Python code to read or write to ``topic_1``.
+1. Organize directories to separate what is needed to create the image from the script code.
+1. Anticipate the use of ``docker-compose``. Eventually, we'll be launching from a single ``docker-compose.yml`` :
+    1. the producer writing to ``topic_1``, and
+    1. The consumer, which reads from ``topic_1``, requests predictions from the model tracked by the MLflow Tracking Server and writes the results to ``topic_2``. The records in ``topic_2`` have the same format as those in topic_1.
+    1. the script (as yet unnamed) that reads from `topic_2` and saves the inferences in a PostgreSQL database, remembering to add a ``fraud_confirmed`` column.
+
+## Organization of subdirectories
+
+Finally (remember CeCe Peniston, 1991 ?), the directories are organized as follows:
+
+```
+./
+│   build_img.ps1
+│   docker-compose.yml
+│   run_app.ps1
+│
+├───app
+│       ccloud_lib.py
+│       client.properties
+│       secrets.ps1
+│       test_producer02.py
+│
+└───docker
+        Dockerfile
+        requirements.txt
+```
+* `build_img.ps1` = a script to create the image
+* ``docker-compose.yml`` = application launch orchestration
+* `run_app.ps1` = launches the application. Sets passwords, then invokes ``docker-compose.yml``.
+* `./app` = the directory containing the consumer script. Contains `secrets.ps1` with passwords and other necessary files.
+* ``./docker`` = the directory with the `Dockerfile` and `requirements.txt` files needed to create our home image.
+
+Take the time to study the contents of the directories and files. One annoying thing is that a `librdkafka` library is required, but it has to be installed via an `apt-get` (see the content of `Dockerfile`).
+
+To build the `my_confluent_img` image :
+
+```
+./build_img.ps1
+
+```
+
+We can see that, at this stage, the new image (`my_confluent_img`) is much lighter than the previous one (`custom-confluent-image`):
+
+<p align="center">
+<img src="./assets/img01.png" alt="drawing" width="600"/>
+<p>
+
+
+
+
+
+
+
+
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# Testing a first version of a consumer for the `fraud_detection_2` application
+
+Run the consumer with the following command :
+
+```
+./run_app.ps1
+
+```
+
+Via the `run_app.ps1`, the consumer in launched in **detached mode**. This is why we don't see anything in the console. We must use docker-compose command to 
+* list the running process (``docker-compose ps``)
+* inspect the logs (`docker-compose logs consumer`) 
+* gently close the app (`docker-compose down consumer`)
+
+<p align="center">
+<img src="./assets/img02.png" alt="drawing" width="600"/>
+<p>
+
+The reason we can read messages from ``topic_1`` is simply because we previously used the ``test_producer02.py`` to send them there. In fact, ``topic_1`` serves as a backlog for 7 days.
+
+
+<p align="center">
+<img src="./assets/img03.png" alt="drawing" width="600"/>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 ## Create a topic
 
 * Connect to the [Confluent](https://confluent.cloud/home) 
@@ -211,7 +348,7 @@ See the definition of "constants" below at the very beginning of the code.
 k_Topic = "topic_1"
 k_Client_Prop = "client.properties"
 k_RT_Data_Producer = "https://real-time-payments-api.herokuapp.com/current-transactions"
-```
+``` -->
 
 
 <!-- ###################################################################### -->

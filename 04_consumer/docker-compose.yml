@@ -1,8 +1,8 @@
 services:
-  producer:
+  consumer:
     image: my_confluent_img
     build: /docker
-    container_name: producer
+    container_name: consumer
     environment:
       - SASL_USERNAME=${SASL_USERNAME}
       - SASL_PASSWORD=${SASL_PASSWORD}
