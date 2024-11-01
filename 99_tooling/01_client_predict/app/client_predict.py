@@ -58,10 +58,13 @@ def get_one_transaction():
     df["trans_date_trans_time"] = df["trans_date_trans_time"].astype(str)
     df.at[index[0], "trans_date_trans_time"] = str_date
 
-    # reorder columns
+    # Modifies the order of columns in the df DataFrame
+    # Moving the last column to the first position
+    # Leaving all other columns in their original order
     cols = df.columns.tolist()
-    reordered_cols = [cols[-1]] + cols[:-1]
+    reordered_cols = [cols[-1]] + cols[:-1]  # the last col then all the other until the before last col
     df = df[reordered_cols]
+
     return df
 
 
@@ -161,7 +164,10 @@ if __name__ == "__main__":
     # Load the best model
     loaded_model = mlflow.sklearn.load_model(model_uri)
 
-    # Ne garde que les colonnes attendues pour faire tourner le modèle (vire aussi la colonne is_fraud)
+    # Ne garde que les colonnes attendues pour faire tourner le modèle (vire entre autres et bien évidement la colonne is_fraud)
+    # C'est pour ça que même si dans topic_1 il n'y a pas de colonne_1 (celle qui contenait un indice dans le jeu d'entrainement) ce n'est pas un problème
+    # En effet, lors de l'entrainement on supprime cette colonne qui ne contient pas d'information pour la prédiction
+    # Voir la fonction load_data(self) dans 02_train_code\02_sklearn\01_template\train.py par exemple
     model_columns = loaded_model.feature_names_in_ if hasattr(loaded_model, "feature_names_in_") else []
     # print("Colonnes attendues par le modèle :", model_columns)
     to_predict_df = to_predict_df[model_columns]

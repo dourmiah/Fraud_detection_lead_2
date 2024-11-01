@@ -1,3 +1,6 @@
+#
+# ! Read the README.md
+
 import time
 import json
 import requests
@@ -15,10 +18,12 @@ def acked(err: int, msg: Message) -> None:
     global delivered_records
     # Delivery report handler called on successful or failed delivery of message
     if err is not None:
-        print(f"Failed to deliver message: {err}")
+        print(f"Failed to deliver message: {err}", flush=True)
     else:
         delivered_records += 1
-        print(f"Produced record to topic {msg.topic()} partition [{msg.partition()}] @ offset {msg.offset()}")
+        print(
+            f"Produced record to topic {msg.topic()} partition [{msg.partition()}] @ offset {msg.offset()}", flush=True
+        )
 
 
 def fetch_and_store() -> None:
@@ -58,22 +63,22 @@ def fetch_and_store() -> None:
             df["trans_date_trans_time"] = df["trans_date_trans_time"].astype(str)
             df.at[index[0], "trans_date_trans_time"] = str_date
 
-            # reorder columns
+            # Modifies the order of columns in the df DataFrame
+            # Moving the last column to the first position
+            # Leaving all other columns in their original order
             cols = df.columns.tolist()
-            reordered_cols = [cols[-1]] + cols[:-1]
+            reordered_cols = [cols[-1]] + cols[:-1]  # the last col then all the other until the before last col
             df = df[reordered_cols]
-
-            # display(df)
 
             data = {"columns": df.columns.tolist(), "index": df.index.tolist(), "data": df.values.tolist()}
 
             # Convertit le dictionnaire data en JSON et encode en UTF-8
             producer.produce(k_Topic, key="dummy", value=json.dumps(data).encode("utf-8"), on_delivery=acked)
-            print(f"Data sent: {data}")
+            print(f"Data sent:\n {data}\n\n", flush=True)
         except requests.RequestException as e:
-            print(f"Request error: {e}")
+            print(f"Request error: {e}", flush=True)
         except Exception as e:
-            print(f"Unexpected error: {e}")
+            print(f"Unexpected error: {e}", flush=True)
 
         time.sleep(15)
 

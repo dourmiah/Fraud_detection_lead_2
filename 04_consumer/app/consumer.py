@@ -1,7 +1,3 @@
-#
-# ! Read the README.md
-# {"columns": ["trans_date_trans_time", "cc_num", "merchant", "category", "amt", "first", "last", "gender", "street", "city", "state", "zip", "lat", "long", "city_pop", "job", "dob", "trans_num", "unix_time", "merch_lat", "merch_long", "is_fraud"], "index": [75409], "data": [["2024-10-31 19:40:47", 4939976756738216, "fraud_Gerhold LLC", "home", 36.97, "Michelle", "Johnston", "F", "3531 Hamilton Highway", "Roma", "TX", 78584, 26.4215, -99.0025, 18128, "IT trainer", "1990-11-07", "f2d7e3f002a0d3ff996cd8b08b0f5cd7", 1730403647362, 26.288472, -99.055366, 0]]}
-
 import ccloud_lib
 from confluent_kafka import Consumer, KafkaException
 

@@ -52,10 +52,13 @@ def get_one_transaction():
     df["trans_date_trans_time"] = df["trans_date_trans_time"].astype(str)
     df.at[index[0], "trans_date_trans_time"] = str_date
 
-    # reorder columns
+    # Modifies the order of columns in the df DataFrame
+    # Moving the last column to the first position
+    # Leaving all other columns in their original order
     cols = df.columns.tolist()
-    reordered_cols = [cols[-1]] + cols[:-1]
+    reordered_cols = [cols[-1]] + cols[:-1]  # the last col then all the other until the before last col
     df = df[reordered_cols]
+
     return df
 
 
