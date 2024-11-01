@@ -1,3 +1,5 @@
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # Introduction
 
 In the [fraud_detection_2 project](https://github.com/40tude/fraud_detection_2), the ``Consume Data`` block, the yellow rectangle, is positioned between the "real-time" data producer and MLflow.
@@ -16,6 +18,8 @@ This document covers 4 topics :
 
 
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # 1. Architecture and operation of the ``Consume Data`` block
 
 The `Consume Data` block in the previous diagram will be organized around two Kafka topics, and we'll play on their ability to store data (backlog) to make the system resilient. 
@@ -34,6 +38,10 @@ The `Consume Data` block in the previous diagram will be organized around two Ka
 1. When the transactions have been read at speed ``speed_2`` in ``topic_1`` and sent to the model, the predictions are dumped into ``topic_2`` at speed ``speed_2``. Finally, ``topic_2`` is emptied at ``speed_3`` to feed the database. 
     * Again, this desynchronization makes for a more resilient system. Even if the connection to the database is lost, everything else (retrieving transactions, requesting predictions, filling `topic_2`, issuing alarms) continues to run "at best" (some might say in degraded mode). 
 
+
+
+
+<!-- ###################################################################### -->
 ## Note
 The above shows that the model receives requests and issues predictions at ``speed_2``. This is to simplify the explanation and to emphasize that the prediction speed is different from the transaction acquisition speed and the database storage speed. 
 
@@ -49,6 +57,9 @@ There is a further, perhaps more subtle reason for implementing 2 topics in the 
 
 
 
+
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # 2. Format of documents exchanged at the various interfaces of the `fraud_detection_2` application
 
 If we take a step back from the diagram below, we can see that the system handles three types of document that are likely to change over time. 
@@ -64,6 +75,10 @@ It is therefore important to anticipate what is going to happen, in order to mak
  1. Information provided to the model to make its predictions.
  1. Information stored in the database
 
+
+
+
+<!-- ###################################################################### -->
  ## Examples
  
 * On the right, there's no guarantee that the format of bank transactions will remain stable over time. Nor is it certain that today's format corresponds exactly to the format expected by the model to make predictions. A transaction could, for example, include more features than necessary. So we have 2 options:
@@ -75,6 +90,7 @@ It is therefore important to anticipate what is going to happen, in order to mak
 
 
 
+<!-- ###################################################################### -->
 ## ``topic_1``: Format of real-time transactions and training set  
 
 In the `data\fraud_test.csv` file used to train the model, the observations have the following format: 
@@ -110,7 +126,7 @@ In table form, we can see that :
 
 
 
-
+<!-- ###################################################################### -->
 ## ``topic_2`` : Format of predictions and database records 
 
 Let's return to the overall architecture of the application 
@@ -143,10 +159,8 @@ Let's return to the overall architecture of the application
 
 
 
-
-
-
-
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
 # 3. Implementing a Kafka topic
 
 We're interested in the topic in which a producer will deposit simulated banking transactions that he has retrieved from the "Real-time Data producer".
@@ -155,6 +169,10 @@ We're interested in the topic in which a producer will deposit simulated banking
 <img src="./assets/img065.png" alt="drawing" width="600"/>
 <p>
 
+
+
+
+<!-- ###################################################################### -->
 ## Create a topic
 
 * Connect to the [Confluent](https://confluent.cloud/home) 
@@ -224,8 +242,15 @@ $env:SASL_PASSWORD = "zBV..."
 
 
 
-# 4. Running the producer of the `fraud_detection_2` application
 
+<!-- ###################################################################### -->
+<!-- ###################################################################### -->
+# 4. Testing a first version of a producer for the `fraud_detection_2` application
+
+
+
+
+<!-- ###################################################################### -->
 ## Configure client application access
 
 * This is a Python code that retrieves simulated bank transactions from the "Real-time Data producer" and deposits them in ``topic_1``. 
@@ -269,9 +294,7 @@ sasl.password=zBV...
 
 
 
-
-
-
+<!-- ###################################################################### -->
 ## Testing the producer 
 
 * To test the producer you must :
@@ -302,6 +325,9 @@ python test_producer02.py
 * To return to PowerShell, type `exit` at the Linux prompt.
 
 
+
+
+<!-- ###################################################################### -->
 ## It's a kind of magic...
 The aim here is to explain how the producer starts up and how the Confluent API's ``Key'' and ``Secret'' pass from PowerShell to Linux.
 
@@ -364,6 +390,17 @@ k_Topic = "topic_1"
 k_Client_Prop = "client.properties"
 k_RT_Data_Producer = "https://real-time-payments-api.herokuapp.com/current-transactions"
 ```
+
+
+### It's really a kind of magic
+At this point, one thing that really works magic is the Docker image we use to run the producer:
+
+```powershell
+./run_confluent_image.ps1
+python test_producer02.py 
+```
+We don't know exactly how it works, or what it's made of. We'll come back to this later.
+
 
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
