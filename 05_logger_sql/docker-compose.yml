@@ -1,0 +1,11 @@
+services:
+  consumer:
+    image: logger_sql_img
+    build: /docker
+    container_name: logger_sql
+    environment:
+      - LOGGER_SQL_URI=${LOGGER_SQL_URI}
+    volumes:
+      - ./app:/home/app              
+    working_dir: /home/app
+    command: python logger_01.py
