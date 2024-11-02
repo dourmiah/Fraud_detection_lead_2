@@ -10,6 +10,7 @@ import ccloud_lib
 import numpy as np
 import pandas as pd
 from io import StringIO
+from typing import Optional
 from mlflow.tracking import MlflowClient
 from confluent_kafka import Consumer, KafkaException
 from confluent_kafka import Producer, Message
@@ -79,7 +80,7 @@ def send_mail(df):
 
 
 # -----------------------------------------------------------------------------
-def read_transaction_from_topic_1(consumer):
+def read_transaction_from_topic_1(consumer: Consumer) -> Optional[pd.DataFrame]:  # Union[pd.DataFrame, None]:
     try:
         while True:
             msg = consumer.poll(1.0)
@@ -90,7 +91,7 @@ def read_transaction_from_topic_1(consumer):
                 raise KafkaException(msg.error())
 
             json_str = msg.value().decode("utf-8")
-            print(f"Message reçu: {json_str}\n\n", flush=True)
+            print(f"Received msg : {json_str}\n\n", flush=True)
 
             try:
                 json_dict = json.loads(json_str)
@@ -105,6 +106,8 @@ def read_transaction_from_topic_1(consumer):
 
     finally:
         consumer.close()
+
+    return None
 
 
 # -----------------------------------------------------------------------------
