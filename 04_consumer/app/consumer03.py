@@ -37,7 +37,7 @@ g_Delivered_Records = 0  # ! global variable. Be careful
 
 
 # -----------------------------------------------------------------------------
-def send_mail(df):
+def send_mail(df: pd.DataFrame) -> None:
 
     smtp_server = os.getenv("SMTP_SERVER")
     smtp_port = os.getenv("SMTP_PORT")
@@ -71,7 +71,6 @@ def send_mail(df):
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()  # protect the connexion
             server.login(smtp_user, smtp_password)
-            # server.sendmail(smtp_user, k_mail_to, msg.as_string())
             server.sendmail(smtp_user, email_recipient, msg.as_string())
         print("E-mail successfully sent.", flush=True)
     except Exception as e:
@@ -164,7 +163,7 @@ def get_run(client, version=k_Latest):
 
 
 # -----------------------------------------------------------------------------
-def create_topic_consumer():
+def create_topic_consumer() -> Consumer:
 
     conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
 
@@ -184,7 +183,7 @@ def create_topic_consumer():
 
 
 # -----------------------------------------------------------------------------
-def create_topic_producer():
+def create_topic_producer() -> Producer:
 
     # Weird to read the conf file twice. No? See create_topic_consumer()
     conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
@@ -194,7 +193,7 @@ def create_topic_producer():
 
 
 # -----------------------------------------------------------------------------
-def create_MLflow_client(consumer):
+def create_MLflow_client(consumer: Consumer) -> MlflowClient:
 
     try:
         boto3.setup_default_session(
@@ -213,24 +212,24 @@ def create_MLflow_client(consumer):
 
 # -----------------------------------------------------------------------------
 # Get the lastest model available
-def load_model(client, version=k_Latest):
+def load_model(client: MlflowClient, version: int = k_Latest):
 
     latest_run = get_run(client, version)
     if not latest_run:
         raise ValueError("No suitable model found")
 
     # Get the URI of the model
-    model_uri = f"runs:/{latest_run.info.run_id}/model"
-    print(f"URI of the best model : {model_uri}", flush=True)
+    run_uri = f"runs:/{latest_run.info.run_id}/model"
+    print(f"URI of the run : {run_uri}", flush=True)
 
-    loaded_model = mlflow.sklearn.load_model(model_uri)
+    loaded_model = mlflow.sklearn.load_model(run_uri)
     return loaded_model
 
 
 # -----------------------------------------------------------------------------
 # If called twice, do not transfer the model again
 # I try to anticipate the fact that the code will be in a never ending loop at one point
-def load_MLflow_model(client, version=k_Latest):
+def load_MLflow_model(client: MlflowClient, version: int = k_Latest):
 
     if not hasattr(load_MLflow_model, "Model_Version_Set") or load_MLflow_model.Model_Version_Set != version:
         load_MLflow_model.Model_Version_Set = version
@@ -316,7 +315,7 @@ if __name__ == "__main__":
         send_mail(current_transaction)
     else:
         prediction_str = "Not Fraud"
-        # send_mail(current_transaction) # testing purpose
+        # send_mail(current_transaction)  # testing purpose
 
     print(f"Prediction : {prediction_str}", flush=True)
 

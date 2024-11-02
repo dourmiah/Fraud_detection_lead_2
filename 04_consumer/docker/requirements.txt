@@ -1,7 +1,8 @@
 # same as producer
 requests
 pandas
-# librdkafka est géré par apt-get
+
+# librdkafka is managed with apt-get
 confluent_kafka 
 avro-python3
 

@@ -13,7 +13,7 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}  
       - SMTP_SERVER=${SMTP_SERVER}  
       - SMTP_PORT=${SMTP_PORT}  
-
+      - EMAIL_RECIPIENT=${EMAIL_RECIPIENT}  
     volumes:
       - ./app:/home/app              
     working_dir: /home/app

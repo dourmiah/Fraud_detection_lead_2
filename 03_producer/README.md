@@ -336,7 +336,7 @@ python test_producer02.py
 
 <!-- ###################################################################### -->
 ## It's a kind of magic (remember 1986 ?)
-The aim here is to explain how the producer starts up and how the Confluent API's ``Key'' and ``Secret'' pass from PowerShell to Linux.
+The aim here is to explain how the producer starts up and how the Confluent API's ``Key`` and ``Secret`` pass from PowerShell to Linux.
 
 ### The `run_confluent_image.ps1` script
 
@@ -412,4 +412,4 @@ We don't know exactly how it works, or what it's made of. We'll come back to thi
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # What's next ?
-Go to the directory `03_consumer` and read the `README.md` file. 
+Go to the directory `03_consumer` and read the [README.md](../04_consumer/README.md) file. 
