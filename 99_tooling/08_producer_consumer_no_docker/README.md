@@ -56,5 +56,6 @@ Ajout de l'envoi de mails
 
 # TODO
 * ~~Revoir load_MLflow_model~~
-* k_Experiments = "sklearn-20241027"
-    * Faut arriver à trouver la dernière expérimentation
+* ~~k_Experiments = "sklearn-20241027"~~
+    * ~~Faut arriver à trouver la dernière expérimentation~~
+    * ~~gerer les différents cas~~

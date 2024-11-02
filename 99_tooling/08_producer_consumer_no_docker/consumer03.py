@@ -29,59 +29,57 @@ k_Before_Last = 0  # before last model version used to make prediction
 k_Topic_1 = "topic_1"  # topics  Id
 k_Topic_2 = "topic_2"
 k_GroupId = "python-group-2"  # default = python-group-2. Group used to read from topic_1
-# k_Experiments = "sklearn-20241027"  # ! FIXME :
 k_Client_Prop = "client.properties"
-k_mail_to = "philippe.baucour@gmail.com"
 k_MLflow_Tracking_URL = "https://fraud-detection-2-ab95815c7127.herokuapp.com/"
 
-g_Delivered_Records = 0
+g_Delivered_Records = 0  # ! global variable. Be careful
 
 
 # -----------------------------------------------------------------------------
 def send_mail(df):
 
-    # Configuration du serveur SMTP et des informations de connexion
     smtp_server = os.getenv("SMTP_SERVER")
     smtp_port = os.getenv("SMTP_PORT")
     smtp_user = os.getenv("SMTP_USER")
     smtp_password = os.getenv("SMTP_PASSWORD")
 
-    # Création de l'objet message
+    email_recipient = os.getenv("EMAIL_RECIPIENT")
+
     msg = MIMEMultipart()
     msg["From"] = smtp_user
-    msg["To"] = "philippe.baucour@gmail.com"
+    msg["To"] = email_recipient
     msg["Subject"] = "Security alert - Fraud detected"
 
-    # Création du corps du message
-    body = "15H63 - Ceci est un message texte d'une ligne."
+    body = "A potentially fraudulent transaction has been detected. Please review the attached document."
     msg.attach(MIMEText(body, "plain"))
 
-    # Conversion du DataFrame en fichier CSV en mémoire
+    # Convert dataframe to csv in memory
     csv_buffer = StringIO()
     df.to_csv(csv_buffer, index=False)
     csv_buffer.seek(0)
 
-    # Ajout du CSV comme pièce jointe
+    # attach the csv to the mail
     attachment = MIMEBase("application", "octet-stream")
     attachment.set_payload(csv_buffer.read())
     encoders.encode_base64(attachment)
     attachment.add_header("Content-Disposition", f"attachment; filename=fraud_detection_report.csv")
     msg.attach(attachment)
 
-    # Connexion au serveur SMTP et envoi du email
+    # Connect and send
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()  # Sécurise la connexion
+            server.starttls()  # protect the connexion
             server.login(smtp_user, smtp_password)
-            server.sendmail(smtp_user, k_mail_to, msg.as_string())
-        print("E-mail successfully sent.")
+            # server.sendmail(smtp_user, k_mail_to, msg.as_string())
+            server.sendmail(smtp_user, email_recipient, msg.as_string())
+        print("E-mail successfully sent.", flush=True)
     except Exception as e:
-        print(f"Error sending e-mail : \n{e}")
+        print(f"Error sending e-mail. Did you run ./secrets.ps1 ? : \n{e}", flush=True)
     return
 
 
 # -----------------------------------------------------------------------------
-def get_one_transaction_from_topic_1(consumer):
+def read_transaction_from_topic_1(consumer):
     try:
         while True:
             msg = consumer.poll(1.0)
@@ -99,7 +97,7 @@ def get_one_transaction_from_topic_1(consumer):
                 df = pd.DataFrame(data=json_dict["data"], columns=json_dict["columns"], index=json_dict["index"])
                 return df
             except (json.JSONDecodeError, KeyError) as e:
-                print(f"Erreur de format JSON : {e}")
+                print(f"Error in JSON format : {e}", flush=True)
                 continue
 
     except KeyboardInterrupt:
@@ -111,7 +109,7 @@ def get_one_transaction_from_topic_1(consumer):
 
 # -----------------------------------------------------------------------------
 # ! PAY ATTENTION
-# ! This one is tricky.
+# ! This function is tricky because of the different cases to be dealt with
 def get_run(client, version=k_Latest):
 
     # Get the Ids of the last two experiements (if available)
@@ -167,19 +165,29 @@ def create_topic_consumer():
 
     conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
 
-    # définit l'ID du groupe de consommateurs auquel appartient le consommateur
+    # defines the ID of the consumer group to which the consumer belongs
     conf["group.id"] = k_GroupId
 
-    # le consommateur commence la lecture au début si aucun offset n’a été enregistré pour lui ou reprend là où il s’est arrêté.
-    # ! L'offset pour chaque partition est stocké au niveau du groupe et non du consommateur individuel
-    # Donc un consommateur rejoignant le même groupe reprendra là où le dernier en était
-    # Si jamais on change le nom du groupe (python-group-42) alors l'utilisateur va lire le plus ancien des messages (earliest)
+    # the consumer starts reading at the beginning if no offset has been recorded for him or continue to read from where he left off.
+    # ! The offset for each partition is stored at group level, NOT at individual consumer level.
+    # So a consumer joining the same group will pick up where the last one left off
+    # If you change the group name (python-group-42), the user will read the earliest message.
     conf["auto.offset.reset"] = "earliest"
 
     consumer_conf = ccloud_lib.pop_schema_registry_params_from_config(conf)
     consumer = Consumer(consumer_conf)
     consumer.subscribe([k_Topic_1])
     return consumer
+
+
+# -----------------------------------------------------------------------------
+def create_topic_producer():
+
+    # Weird to read the conf file twice. No? See create_topic_consumer()
+    conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
+    producer_conf = ccloud_lib.pop_schema_registry_params_from_config(conf)
+    producer = Producer(producer_conf)
+    return producer
 
 
 # -----------------------------------------------------------------------------
@@ -196,7 +204,6 @@ def create_MLflow_client(consumer):
 
     mlflow.set_tracking_uri(k_MLflow_Tracking_URL)
 
-    # Create an MLflow client
     client = MlflowClient()
     return client
 
@@ -205,7 +212,6 @@ def create_MLflow_client(consumer):
 # Get the lastest model available
 def load_model(client, version=k_Latest):
 
-    # latest_run = get_latest_model(client, k_Experiments, version)
     latest_run = get_run(client, version)
     if not latest_run:
         raise ValueError("No suitable model found")
@@ -220,6 +226,7 @@ def load_model(client, version=k_Latest):
 
 # -----------------------------------------------------------------------------
 # If called twice, do not transfer the model again
+# I try to anticipate the fact that the code will be in a never ending loop at one point
 def load_MLflow_model(client, version=k_Latest):
 
     if not hasattr(load_MLflow_model, "Model_Version_Set") or load_MLflow_model.Model_Version_Set != version:
@@ -230,10 +237,12 @@ def load_MLflow_model(client, version=k_Latest):
 
 # -----------------------------------------------------------------------------
 def make_prediction(loaded_model, to_predict_df):
-    # Ne garde que les colonnes attendues pour faire tourner le modèle (vire entre autres et bien évidement la colonne is_fraud)
-    # C'est pour ça que même si dans topic_1 il n'y a pas de colonne_1 (celle qui contenait un indice dans le jeu d'entrainement) ce n'est pas un problème
-    # En effet, lors de l'entrainement on supprime cette colonne qui ne contient pas d'information pour la prédiction
-    # Voir la fonction load_data(self) dans 02_train_code\02_sklearn\01_template\train.py par exemple
+
+    # Keep only the columns needed to run the model (the is_fraud feature is excluded)
+    # That's why even if topic_1 doesn't have a column_1 (the one that contained an index in the training set), it's not a problem.
+    # In fact, during training we delete this column, which contains no usefull information for inferences.
+    # See the load_data(self) function in 02_train_code\02_sklearn\01_template\train.py for example.
+
     model_columns = loaded_model.feature_names_in_ if hasattr(loaded_model, "feature_names_in_") else []
     # print("Colonnes attendues par le modèle :", model_columns, flush=True)
     to_predict_df = to_predict_df[model_columns]
@@ -248,7 +257,9 @@ def make_prediction(loaded_model, to_predict_df):
 # -----------------------------------------------------------------------------
 # Callback used when writing on topic_2
 def acked(err: int, msg: Message) -> None:
+
     global g_Delivered_Records
+
     # Delivery report handler called on successful or failed delivery of message
     if err is not None:
         print(f"Failed to deliver message: {err}", flush=True)
@@ -260,19 +271,34 @@ def acked(err: int, msg: Message) -> None:
 
 
 # -----------------------------------------------------------------------------
+def write_transaction_to_topic_2(producer, current_transaction):
+    # Add a feature "fraud_confirmed" to the 1 line dataframe "current_transaction" and save it topic_2
+    current_transaction = current_transaction.assign(fraud_confirmed=[np.nan])
+
+    print("Current transaction to be sent to topic_2", flush=True)
+    print(current_transaction, flush=True)
+    print(flush=True)
+
+    data_as_json = current_transaction.to_json(orient="records")
+    producer.produce(k_Topic_2, key=k_Key, value=data_as_json.encode("utf-8"), on_delivery=acked)
+    producer.flush()
+    time.sleep(5)  # if the code right after write_transaction_to_topic_2 this helps make sure acked is called
+
+
+# -----------------------------------------------------------------------------
 if __name__ == "__main__":
-    # for testing send_one_mail() function calls
+    # testing purpose
     # df = pd.DataFrame({"Name": ["Tom", "nick", "krish", "jack"], "Age": [20, 21, 19, 18]})
     # send_one_mail(df)
 
     consumer = create_topic_consumer()
 
     try:
-        current_transaction = get_one_transaction_from_topic_1(consumer)
+        current_transaction = read_transaction_from_topic_1(consumer)
         to_predict_df = current_transaction.copy()
-        print(to_predict_df)
+        # print(to_predict_df,flush=True)
     except KafkaException as e:
-        print(f"Erreur Kafka : {e}", flush=True)
+        print(f"Kafka error : {e}", flush=True)
 
     client = create_MLflow_client(consumer)
     loaded_model = load_MLflow_model(client, k_Latest)
@@ -287,24 +313,14 @@ if __name__ == "__main__":
         send_mail(current_transaction)
     else:
         prediction_str = "Not Fraud"
+        # send_mail(current_transaction) # testing purpose
 
     print(f"Prediction : {prediction_str}", flush=True)
 
-    # TODO : Add a feature "fraud_confirmed" to the 1 line dataframe "current_transaction" and save it topic_2
-    current_transaction = current_transaction.assign(fraud_confirmed=[np.nan])
-
-    print("Current transaction to be sent to topic_2", flush=True)
-    print(current_transaction, flush=True)
-    print()
-
-    # store current_transaction in topic_2
-    # Weird to read the conf file twice. No?
-    conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
-    producer_conf = ccloud_lib.pop_schema_registry_params_from_config(conf)
-    producer = Producer(producer_conf)
-    data_as_json = current_transaction.to_json(orient="records")
-    producer.produce(k_Topic_2, key=k_Key, value=data_as_json.encode("utf-8"), on_delivery=acked)
-    producer.flush()
-    time.sleep(5)
+    try:
+        producer = create_topic_producer()
+        write_transaction_to_topic_2(producer, current_transaction)
+    except KafkaException as e:
+        print(f"Kafka error : {e}", flush=True)
 
     print("Consumer is done", flush=True)

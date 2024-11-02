@@ -17,4 +17,4 @@ services:
     volumes:
       - ./app:/home/app              
     working_dir: /home/app
-    command: python consumer02.py
+    command: python consumer03.py
