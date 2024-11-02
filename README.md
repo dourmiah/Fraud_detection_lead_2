@@ -62,8 +62,9 @@ TO DO list
 * In this ``README.md`` as well as some of the others documentation files, screen captures may include information relative to the previous project. 
     * That shouldn't prevent you from understanding the point.
 * Most of the ``README.md`` are written so that you can rebuild the project on your own
-    * This is why they look like recipe
-    * The ``README.md`` is also a way, for me, to keep my own notes and share what I learn 
+    * This is why they look like recipe. 
+    * This is made on purpose.
+    * The ``README.md`` are also a way for me to keep my own notes and put down in black and white what I think I've understood. 
 
 
 
@@ -186,13 +187,30 @@ color_output = True
 * Get a copy of `fraud_test.csv` from this [page](https://app.jedha.co/course/final-projects-l/automatic-fraud-detection-l)
 * Drop the ``.csv`` file in ``./data``
 
+### Note
+* If, for any reason, you can't get the ``.csv`` file from the previous page... No worry.
+* In the Notebook used for the EDA (see below) you can either get the data from a local copy or from a public AWS S3 bucket.
+* Comment/uncomment the option you need 
+
+```python
+filename_in = Path(k_AssetsDir)/k_FileName
+df = pd.read_csv(filename_in)
+
+# Alternative (AWS S3 bucket)
+# df = pd.read_csv("https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv")
+
+df.columns = df.columns.str.lower()
+df.head(3)
+
+```
+
 ### Miscelaneous
 * Review the contents of `.gitignore`
 
 
 <!-- ###################################################################### -->
 ## First commit on GitHub
-* You can either use graphical feature from VSCode or git commands in a terminal
+* You can either use the VSCode graphical way or a git commands in a terminal
 
 
 
@@ -211,7 +229,7 @@ conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
 * ``Clear All Outputs`` (it does'nt hurt)
 * ``Restart`` the kernel
 * Approve when VSCode ask to install ``ipykernel`` in order to please Python
-* You should be go to go
+* You should be good to go
 * ``Run All``
 * Read the comments, at the end a map with the spots in US should be displayed
 
@@ -223,7 +241,7 @@ conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # What's next ?
-* Go to the directory `00_mlflow_tracking_server` and read the `README.md` file.
+* Go to the directory `00_mlflow_tracking_server` and read the [README.md](./00_mlflow_tracking_server/README.md) file.
 
 
 
