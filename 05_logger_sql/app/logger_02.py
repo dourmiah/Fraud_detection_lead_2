@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import ccloud_lib
 import pandas as pd
 from typing import Optional
@@ -22,6 +23,7 @@ def read_transaction_from_topic_2(consumer: Consumer) -> Optional[pd.DataFrame]:
 
             if msg is None:
                 continue
+
             if msg.error():
                 raise KafkaException(msg.error())
 
@@ -29,11 +31,14 @@ def read_transaction_from_topic_2(consumer: Consumer) -> Optional[pd.DataFrame]:
             print(f"Received msg : {json_str}\n\n", flush=True)
 
             try:
-                json_dict = json.loads(json_str)
-                print("json_dict : ", json_dict)
-                return None
+                # json_dict = json.loads(json_str)
+                # print("json_dict : ", json_dict)
+                # return None
+                data_list = json.loads(json_str)  # JSON vers liste de dictionnaires
+                df = pd.DataFrame(data_list)  # Liste de dicts vers DataFrame
+                # print(df)
                 # df = pd.DataFrame(data=json_dict["data"], columns=json_dict["columns"], index=json_dict["index"])
-                # return df
+                return df
             except (json.JSONDecodeError, KeyError) as e:
                 print(f"Error in JSON format : {e}", flush=True)
                 continue
@@ -70,6 +75,8 @@ def create_topic_consumer() -> Consumer:
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
 
+    print("Logger SQL started", flush=True)
+
     consumer = create_topic_consumer()
 
     try:
@@ -81,7 +88,8 @@ if __name__ == "__main__":
     database_url = os.getenv("LOGGER_SQL_URI")
     engine = create_engine(database_url)
 
-    print("Logger SQL is done", flush=True)
+    print("Logger SQL will be done in 5 sec", flush=True)
+    time.sleep(5)
 
 
 # # -----------------------------------------------------------------------------

@@ -13,12 +13,13 @@ Make sure you read the producer [README.md](../03_producer/README.md) file first
 # Introduction
 
 This document covers :
-1. Create a Docker image to run Pyton scripts 
-    * The scipts read ``topic_1`` messages
-1. Testing a first version of a consumer for the `fraud_detection_2` application
-
-<!-- 1. Add to the Docker image what is needed to make inferences
-1. Technical: Implementation of a Kafka Topic in `fraud_detection_2`. -->
+1. Create a Docker image to run ``consumerXY.py``Pyton scripts which are able to :
+    * Read messages from ``topic_1`` 
+    * Download the last run (model) from MLflow Tracking Server
+    * Use the message as an input for the run
+    * Get the prediction from the model
+    * Save the message and the prediction in ``topic_2``
+1. The first version of a ``consumerXY.py`` for the `fraud_detection_2` application
 
 
 
