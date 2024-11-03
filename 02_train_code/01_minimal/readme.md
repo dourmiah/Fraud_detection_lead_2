@@ -245,4 +245,5 @@ if __name__ == "__main__":
 
 <!-- ###################################################################### -->
 ## What's next ?
-Go to the `..\02_train_code\02_sklearn\01_template` directory and read the `readme.md`.
+* Go to the `..\02_train_code\02_sklearn\01_template` directory and read the [README.md](../02_sklearn/01_template/README.md).
+    * The previous link to the next README.md to read may not work on GitHub but it works like a charm locally in VSCode or a Web browser.

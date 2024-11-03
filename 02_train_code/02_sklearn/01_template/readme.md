@@ -314,7 +314,8 @@ conda install imbalanced-learn
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
 # What's next ?
-Go to the directory `03_producer` and read the `README.md` file. 
+* Go to the directory `03_producer` and read the [README.md](../../../03_producer/README.md) file. 
+    * The previous link to the next README.md to read may not work on GitHub but it works like a charm locally in VSCode or a Web browser.
 
 
 

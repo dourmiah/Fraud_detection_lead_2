@@ -13,7 +13,8 @@ Make sure you read the producer [README.md](../03_producer/README.md) file first
 # Introduction
 
 This document covers :
-1. Create a Docker image to run Pyton scripts that can read ``topic_1`` messages
+1. Create a Docker image to run Pyton scripts 
+    * The scipts read ``topic_1`` messages
 1. Testing a first version of a consumer for the `fraud_detection_2` application
 
 <!-- 1. Add to the Docker image what is needed to make inferences
@@ -23,13 +24,15 @@ This document covers :
 
 <!-- ###################################################################### -->
 <!-- ###################################################################### -->
-# Create a Docker image to run Pyton scripts that can read ``topic_1``
+# Create a Docker image to run Pyton scripts <!-- that can read ``topic_1`` -->
 
-After running a first version of the ``producer`` Python script in the `jedha/confluent-image` image, rather than launching the `test_producerXY.py` application from the Linux prompt I tried, without success, to automate its launch.
+After running a first version of the ``producer`` Python script in the `jedha/confluent-image` image, rather than launching the `test_producerXY.py` script "by hand" from the Linux prompt I tried, without success, to automate its launch (if needed, read again the [README.md](../03_producer/README.md))
 
 After several attempts, the decision was made to create a Docker image using the following "method" :
-1. Creating a minimal conda virtual environment using only Python 3.12
+1. Creating a minimal conda virtual environment using only Python 3.12 (``conda create --name consumer_nodocker python=3.12 -y``)
 1. Create a directory and copy the files needed to run `test_producerXY.py` (``secrets.ps1``, ``client.properties``...)
+    * At the very beginning `consumer_XY` did not exist yet 
+    * Only `test_producerXY.py` was available
 1. Add to the virtual environment, the modules required by the Python script (at least, read and write to ``topic_1``)
 1. Organize directories to separate what is needed to create the Docker image from the script itself.
 1. Anticipate the use of ``docker-compose``. Indeed, at one point, we'll be launching the different components of the ``fraud_detection_2`` application from a single ``docker-compose.yml``. This include, at least, the following components :
@@ -38,6 +41,10 @@ After several attempts, the decision was made to create a Docker image using the
     1. The ``logger_sql`` : reads from `topic_2` and saves the inferences in a PostgreSQL database, remembering to add a ``fraud_confirmed`` feature.
     1. ...
 
+
+
+
+<!-- ###################################################################### -->
 ## Organization of subdirectories
 
 Finally (remember CeCe Peniston, 1991 ?), the directories are organized as follows:
@@ -61,7 +68,7 @@ Finally (remember CeCe Peniston, 1991 ?), the directories are organized as follo
 * `build_img.ps1` = a script to create the Docker image
 * ``docker-compose.yml`` = application launch orchestration
 * `run_app.ps1` = launches the application. Sets passwords, then invokes ``docker-compose.yml``.
-* `./app` = the directory containing the ``consumerXY.py`` script. Contains also the `secrets.ps1` with passwords and other necessary files.
+* `./app` = the directory containing the ``consumerXY.py`` script. It contains other needed files and `secrets.ps1` (with keys and sensitive parameters)
 * ``./docker`` = the directory with the `Dockerfile` and `requirements.txt` files needed to create our own image.
 
 
@@ -72,12 +79,19 @@ To build the `consumer_img` image, invoke the script :
 
 ```
 
+This generates a pretty fat `consumer.img` file.
+
 <p align="center">
 <img src="./assets/img01.png" alt="drawing" width="600"/>
 <p>
 
 
-The `build_img.ps1` PowerShell script is a one liner. It calls docker to build `consumer_img` and indicates where to find the Dockerfile.
+The `build_img.ps1` PowerShell script is a one liner. It calls ``docker`` to build `consumer_img` and indicates where to find the Dockerfile. 
+
+The reason why I keep writing one line PowerShell scripts is that they add a "level of indirection" :
+* I always invoke the same script (`build_img.ps1`) 
+* The content take care of the context : build an image for ``consumerXY.py``, for ``producerXY.py``...
+* The same apply to `run_app.ps1`. I run the same command but it launch different modules according the context. 
 
 ```
 docker build -t consumer_img -f docker/Dockerfile .
@@ -108,13 +122,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ .
 
 ```
-* We need the AWS stuff because ``consumerXY.py`` access the AWS S3
-* We also need to install "by hand" the librdkafka-dev
+* We need the AWS machinery because ``consumerXY.py`` accesses the AWS S3 to read the runs
+* We also need to install "by hand" the librdkafka-dev 
 * The other modules are listed in the ``requirements.txt`` file
 
 
 
-Find below the `requirements.txt` file
+Here below the `requirements.txt` file
 
 ```
 # same as producer
@@ -132,10 +146,13 @@ imbalanced-learn
 
 ```
 
-## Comment 
+
+
+<!-- ###################################################################### -->
+## Comments 
 * `imbalanced-learn` is on the last line. 
 * Indeed the model, which is on the MLflow Tracking Server use SMOTE.
-* It's **important** to bear in mind that if the template uses another ML module, the latter will need to be added to the “requirements.txt” file, so that once the template has been downloaded, you can run it in the context of the Docker image.   
+* It's **important** to bear in mind that if the template uses another ML module, the latter will need to be added to the ``requirements.txt`` file, so that once the model has been downloaded, you can run it in the context of the Docker image.   
 
 At the end of the build process, we have a docker image that we can use in a ``docker-compose.yml`` configuration. Here is the ``.yml`` file :
 
@@ -163,7 +180,7 @@ services:
 ```
 * Pay attention to the very last line. I use to have different version of ``consumerXY.py``. If you create a new version of the script, make sure to update this line
 * There are many environment variables passed because most of them should not be public.
-* The good new is that to run the ``consumerXY.py`` one need to invoke ``.\run_app.ps1``
+* The good news is that to run the ``consumerXY.py`` one just need to invoke ``.\run_app.ps1``
 
 Here is the ``./app/secrets.ps1`` file :
 ```
@@ -197,12 +214,15 @@ It is 2 lines :
 1. invoque ``docker-compose`` which use the content of ``docker-compose.yml``
 
 
+
+<!-- ###################################################################### -->
 ## Comments
 1. Again. Take the time to study the contents of the directories and files. 
 1. While building the Docker image, one annoying thing is that a `librdkafka` library is required, but it has to be installed via an `apt-get` (see the content of `Dockerfile`).
-1. As for the “method” of creating a conda virtual environment, a directory, and launching the module code in this context... It's a bit cumbersome, consuming disk space and time. On the other hand, you know exactly what's in the Docker image and you're able to make relatively light images.  
-1. As far as the organization of subdirectories and the naming convention for scripts are concerned, I think I'll keep it in future modules (logger_sql ...).
-1. I think I'll also continue to use docker-compose regularly even if I only have one application to run. Indeed, this organization makes a clear separation between the construction of the image and the context to be set up to run the application in the image. Finally, if need be, we have the elements to launch the application with others from a more substantial ``docker-compose.yml``. 
+1. As for the “method” of creating a conda virtual environment, a directory, and launching the module code in this context... It's a bit cumbersome, consuming disk space and time. On the other hand, at the end you know exactly what's in the Docker image and you're able to make relatively lite images.  
+1. As far as the organization of subdirectories and the naming convention for scripts are concerned, I think I'll keep it in future modules (``logger_sql`` ...).
+1. I think I'll also continue to use docker-compose regularly even if I only have one application to run. 
+1. Indeed, this organization makes a clear separation between the construction of the image and the context to be set up to run the application in the image. Finally, if need be, we have the elements to launch the application with others from a more substantial ``docker-compose.yml``. 
 
 
 
@@ -230,7 +250,7 @@ Via the `run_app.ps1`, the consumer in launched in **detached mode**. This is wh
 <img src="./assets/img02.png" alt="drawing" width="600"/>
 <p>
 
-If, for any reason, you have doubts about the output you get in the terminal with `docker-compose logs consumer`, run the command `docker-compose logs consumer` twice. Indeed, outputs are buffered so they may take some time. On the other hand feel free to use Docker Desktop to inspect the output.
+If, for any reason, you have doubts about the output you get in the terminal with `docker-compose logs consumer`, run the command `docker-compose logs consumer` twice (or more). Indeed, outputs are buffered so they may take some time. On the other hand feel free to use Docker Desktop to inspect the output.
 
 <p align="center">
 <img src="./assets/img025.png" alt="drawing" width="600"/>
@@ -267,7 +287,7 @@ This means that the script is able to
 1. submit the read from ``topic_1`` as an input to the downloaded model and get a prediction. 
     * Indeed, the last line above says ``Not Fraud``
 
-The last 2 messages explain that the record plus the inference is logged on ``topic_2`` 
+The last 2 messages explain that the record plus the inference are now logged on ``topic_2`` 
 
 ```
 consumer  | Produced record to topic topic_2 partition [5] @ offset 14
@@ -289,8 +309,16 @@ If one go to [confluent](https://confluent.cloud/) he can double check the conte
 
 This is not demonstrated here but with ``consumer03.py`` and above, the script can :
 * Either use the model of the last run or the model of the one before last run (rollback)
-* If a fraudulent transaction is inferred an email is sent (settings are done withing ``secrets.ps1``)
+    * A mechanism avoids downloading the model of the desired “run” if it is already available locally.
+    * Indeed I suspect roolbacks will be seldom. 
+    * More often, once downloaded the model of the last run will be used again and again to make inferences
+* If a fraudulent transaction is inferred an email is sent 
+    * The parameters are found in ``secrets.ps1``
+    * The attached ``.csv`` file contains all transaction information  
 
+<p align="center">
+<img src="./assets/img032.png" alt="drawing" width="600"/>
+<p>
 
 
 
@@ -300,7 +328,10 @@ This is not demonstrated here but with ``consumer03.py`` and above, the script c
 
 * The next version of ``consumerXY.py`` should be based on an infinite loop 
     * Like it is done in ``producerXY.py``
+* As I write this ``README.md``, nothing has been decided yet, but I'm wondering if ``producer``, ``consumer`` and others modules shouldn't be Flask applications. The point is that we could call them to pass them parameters, ask them to return a status. Once again, it's just an idea and nothing has been decided yet. 
+* The priority is to run ``logger_sql``, which will read the content of ``topic_2`` and save it in an SQL database.
 * Go to the directory `05_logger_sql` and read the [README.md](../05_logger_sql/README.md) file. 
+    * The previous link to the next README.md to read may not work on GitHub but it works like a charm locally in VSCode or a Web browser.
 
 
 

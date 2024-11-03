@@ -242,7 +242,7 @@ conda install numpy pandas seaborn matplotlib plotly nbformat -c conda-forge -y
 <!-- ###################################################################### -->
 # What's next ?
 * Go to the directory `00_mlflow_tracking_server` and read the [README.md](./00_mlflow_tracking_server/README.md) file 
-    * The link to the README.md may not work on GitHub but is works like a charm in VSCode.
+    * The previous link to the next README.md to read may not work on GitHub but it works like a charm locally in VSCode or a Web browser.
 
 
 
