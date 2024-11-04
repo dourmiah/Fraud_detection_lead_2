@@ -296,8 +296,8 @@ if __name__ == "__main__":
     consumer = create_topic_consumer()
 
     try:
-        current_transaction = read_transaction_from_topic_1(consumer)
-        to_predict_df = current_transaction.copy()
+        current_transaction_df = read_transaction_from_topic_1(consumer)
+        to_predict_df = current_transaction_df.copy()
         # print(to_predict_df,flush=True)
     except KafkaException as e:
         print(f"Kafka error : {e}", flush=True)
@@ -308,11 +308,11 @@ if __name__ == "__main__":
 
     # current_transaction is only 1 line
     # overwrite current is_fraud feature with model inference
-    current_transaction.loc[current_transaction.index[0], "is_fraud"] = prediction
+    current_transaction_df.loc[current_transaction_df.index[0], "is_fraud"] = prediction
 
     if prediction:
         prediction_str = "Fraud"
-        send_mail(current_transaction)
+        send_mail(current_transaction_df)
     else:
         prediction_str = "Not Fraud"
         # send_mail(current_transaction)  # testing purpose
@@ -321,7 +321,7 @@ if __name__ == "__main__":
 
     try:
         producer = create_topic_producer()
-        write_transaction_to_topic_2(producer, current_transaction)
+        write_transaction_to_topic_2(producer, current_transaction_df)
     except KafkaException as e:
         print(f"Kafka error : {e}", flush=True)
 

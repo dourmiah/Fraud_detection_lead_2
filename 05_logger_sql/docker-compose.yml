@@ -10,4 +10,4 @@ services:
     volumes:
       - ./app:/home/app              
     working_dir: /home/app
-    command: python logger_02.py
+    command: python logger_03.py

@@ -52,3 +52,18 @@ conda install sqlalchemy -c conda-forge -y
 <img src="./assets/img06.png" alt="drawing" width="600"/>
 <p>
 
+
+# Pour faire tourner logger_03.py
+
+~~conda install requests pandas librdkafka -c conda-forge -y~~
+conda install librdkafka -c conda-forge -y
+pip install confluent_kafka  avro-python3
+conda install requests -c conda-forge -y
+
+Dans secrets.ps1 ajouter les access à confluent SASL...
+
+Je change le GroupId pour recommencer à lire depuis le départ
+k_GroupId = "python-group-2"
+
+Soucis pour enregistrer car la table attend un bool pour is_fraud et j'ai un int
+

@@ -1,6 +1,11 @@
+#
+# ! Lire le README
+# conda activate logger_sql
+
+
 import pandas as pd
 import os
-from sqlalchemy import create_engine, types
+from sqlalchemy import create_engine, types, inspect
 
 k_table_name = "fraud_detection_2_table"
 
@@ -60,13 +65,22 @@ def fetch_table_content(table_name):
     return df
 
 
+def check_exist(table_name: str) -> bool:
+    """Vérifie si une table existe déjà dans la base SQL."""
+    inspector = inspect(engine)
+    return inspector.has_table(table_name)
+
+
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
 
     df = pd.DataFrame({"Name": ["Tom", "Nick", "Krish", "Jack"], "Age": [20, 21, 19, 18]})
 
-    # Création de la table à partir d'un DataFrame initial
-    create_table_from_dataframe(df, k_table_name)
+    bExist = check_exist(k_table_name)
+
+    if not bExist:
+        # Création de la table à partir d'un DataFrame initial
+        create_table_from_dataframe(df, k_table_name)
 
     # Insérer le df
     insert_dataframe(df, k_table_name)

@@ -10,6 +10,7 @@ import ccloud_lib
 import numpy as np
 import pandas as pd
 from io import StringIO
+from typing import Optional
 from mlflow.tracking import MlflowClient
 from confluent_kafka import Consumer, KafkaException
 from confluent_kafka import Producer, Message
@@ -70,7 +71,6 @@ def send_mail(df):
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()  # protect the connexion
             server.login(smtp_user, smtp_password)
-            # server.sendmail(smtp_user, k_mail_to, msg.as_string())
             server.sendmail(smtp_user, email_recipient, msg.as_string())
         print("E-mail successfully sent.", flush=True)
     except Exception as e:
@@ -79,7 +79,7 @@ def send_mail(df):
 
 
 # -----------------------------------------------------------------------------
-def read_transaction_from_topic_1(consumer):
+def read_transaction_from_topic_1(consumer: Consumer) -> Optional[pd.DataFrame]:  # Union[pd.DataFrame, None]:
     try:
         while True:
             msg = consumer.poll(1.0)
@@ -105,6 +105,8 @@ def read_transaction_from_topic_1(consumer):
 
     finally:
         consumer.close()
+
+    return None
 
 
 # -----------------------------------------------------------------------------
@@ -161,7 +163,7 @@ def get_run(client, version=k_Latest):
 
 
 # -----------------------------------------------------------------------------
-def create_topic_consumer():
+def create_topic_consumer() -> Consumer:
 
     conf = ccloud_lib.read_ccloud_config(k_Client_Prop)
 
@@ -286,6 +288,12 @@ def write_transaction_to_topic_2(producer, current_transaction):
 
 
 # -----------------------------------------------------------------------------
+def afficher_types_colonnes(dataframe: pd.DataFrame) -> None:
+    for colonne, dtype in dataframe.dtypes.items():
+        print(f"Colonne '{colonne}': {dtype}")
+
+
+# -----------------------------------------------------------------------------
 if __name__ == "__main__":
     # testing purpose
     # df = pd.DataFrame({"Name": ["Tom", "nick", "krish", "jack"], "Age": [20, 21, 19, 18]})
@@ -294,11 +302,13 @@ if __name__ == "__main__":
     consumer = create_topic_consumer()
 
     try:
-        current_transaction = read_transaction_from_topic_1(consumer)
-        to_predict_df = current_transaction.copy()
+        current_transaction_df = read_transaction_from_topic_1(consumer)
+        to_predict_df = current_transaction_df.copy()
         # print(to_predict_df,flush=True)
     except KafkaException as e:
         print(f"Kafka error : {e}", flush=True)
+
+    afficher_types_colonnes(to_predict_df)
 
     client = create_MLflow_client(consumer)
     loaded_model = load_MLflow_model(client, k_Latest)
@@ -306,11 +316,11 @@ if __name__ == "__main__":
 
     # current_transaction is only 1 line
     # overwrite current is_fraud feature with model inference
-    current_transaction.loc[current_transaction.index[0], "is_fraud"] = prediction
+    current_transaction_df.loc[current_transaction_df.index[0], "is_fraud"] = prediction
 
     if prediction:
         prediction_str = "Fraud"
-        send_mail(current_transaction)
+        send_mail(current_transaction_df)
     else:
         prediction_str = "Not Fraud"
         # send_mail(current_transaction) # testing purpose
@@ -319,7 +329,7 @@ if __name__ == "__main__":
 
     try:
         producer = create_topic_producer()
-        write_transaction_to_topic_2(producer, current_transaction)
+        write_transaction_to_topic_2(producer, current_transaction_df)
     except KafkaException as e:
         print(f"Kafka error : {e}", flush=True)
 
