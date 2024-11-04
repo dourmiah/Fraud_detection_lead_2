@@ -54,7 +54,7 @@ from confluent_kafka import Consumer, KafkaException
 # Colonne 'long': float64
 # Colonne 'city_pop': int64
 # Colonne 'job': object
-# Colonne 'dob': object ---------------
+# Colonne 'dob': object
 # Colonne 'trans_num': object
 # Colonne 'unix_time': int64
 # Colonne 'merch_lat': float64
