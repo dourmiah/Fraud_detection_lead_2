@@ -1,0 +1,15 @@
+artifact_uri: file:///home/app/mlruns/0/241c0a99a8484e3f9a98a1acfdd2b0f9/artifacts
+end_time: 1731428475100
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 241c0a99a8484e3f9a98a1acfdd2b0f9
+run_name: industrious-lamb-586
+run_uuid: 241c0a99a8484e3f9a98a1acfdd2b0f9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731428474535
+status: 3
+tags: []
+user_id: root

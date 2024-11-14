@@ -1,0 +1,15 @@
+artifact_uri: file:///home/app/mlruns/0/c5969468fb364215a3d2f4620b7b6018/artifacts
+end_time: 1731428378944
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c5969468fb364215a3d2f4620b7b6018
+run_name: gregarious-stoat-602
+run_uuid: c5969468fb364215a3d2f4620b7b6018
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731428378379
+status: 3
+tags: []
+user_id: root

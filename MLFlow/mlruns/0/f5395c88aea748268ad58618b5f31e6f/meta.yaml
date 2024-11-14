@@ -1,0 +1,15 @@
+artifact_uri: file:///home/app/mlruns/0/f5395c88aea748268ad58618b5f31e6f/artifacts
+end_time: 1731428444545
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f5395c88aea748268ad58618b5f31e6f
+run_name: handsome-toad-483
+run_uuid: f5395c88aea748268ad58618b5f31e6f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731428443987
+status: 3
+tags: []
+user_id: root

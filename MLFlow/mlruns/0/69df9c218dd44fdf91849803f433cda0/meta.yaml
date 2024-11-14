@@ -1,0 +1,15 @@
+artifact_uri: file:///home/app/mlruns/0/69df9c218dd44fdf91849803f433cda0/artifacts
+end_time: 1731428336530
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 69df9c218dd44fdf91849803f433cda0
+run_name: defiant-zebra-283
+run_uuid: 69df9c218dd44fdf91849803f433cda0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731428335935
+status: 3
+tags: []
+user_id: root

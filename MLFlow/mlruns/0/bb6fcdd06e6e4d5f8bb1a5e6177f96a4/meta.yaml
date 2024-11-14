@@ -1,0 +1,15 @@
+artifact_uri: file:///home/app/mlruns/0/bb6fcdd06e6e4d5f8bb1a5e6177f96a4/artifacts
+end_time: 1731428173102
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: bb6fcdd06e6e4d5f8bb1a5e6177f96a4
+run_name: casual-fox-804
+run_uuid: bb6fcdd06e6e4d5f8bb1a5e6177f96a4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731428172529
+status: 3
+tags: []
+user_id: root

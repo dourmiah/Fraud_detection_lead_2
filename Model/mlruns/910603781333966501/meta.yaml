@@ -1,0 +1,6 @@
+artifact_location: file:///home/app/mlruns/910603781333966501
+creation_time: 1731286449972
+experiment_id: '910603781333966501'
+last_update_time: 1731286449972
+lifecycle_stage: active
+name: :MLFLOW_EXPERIMENT_NAME
