@@ -46,7 +46,7 @@ def task():
     data = response.json()
 
     if isinstance(data, str):
-        data = json.loads(data) # Parse un JSON en Python dictionary
+        data = json.loads(data) # Parse a JSON to a Python dictionary
    
     record_key = "transaction"
     record_value = json.dumps(

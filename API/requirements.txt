@@ -1,0 +1,10 @@
+pandas
+openpyxl
+numpy
+fastapi 
+uvicorn[standard]
+pydantic
+typing
+gunicorn
+scikit-learn
+joblib

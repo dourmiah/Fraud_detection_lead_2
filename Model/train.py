@@ -28,6 +28,9 @@ from sklearn.metrics import (
     roc_curve,
 )
 
+import joblib
+import pickle
+
 author = "Dominique"
 nb_estimators = 150
 # S3_uri = 
@@ -85,6 +88,9 @@ class ModelTrainer:
         )
 
         model_pipeline.fit(X_train[self.numeric_columns], y_train)
+
+        with open('randomforest_model.pkl', 'wb') as file:
+            joblib.dump(model_pipeline, file)
 
         mlflow.log_metric("train_model_time", round(time.time() - start_time, 2))
         logger.info(f"train_model : {round(time.time() - start_time, 2)} sec.")
@@ -180,12 +186,10 @@ class ModelTrainer:
 
         # Log the model with MLflow
         mlflow.sklearn.log_model(
-            # sk_model=model_pipeline,
-            # artifact_path="model",
-            # registered_model_name="random_forest",
-            # signature=signature,
-            model_pipeline,
-            "model"
+            sk_model=model_pipeline,
+            artifact_path="model",
+            registered_model_name="random_forest",
+            signature=signature
         )
 
         # Log the time spent to log the model

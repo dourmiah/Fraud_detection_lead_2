@@ -1,20 +1,20 @@
-2024-11-12 19:03:33,610 - __main__ - DEBUG - Current dir : /home/app
-2024-11-12 19:03:33,612 - __main__ - INFO - Training started
-2024-11-12 19:03:33,662 - git.cmd - DEBUG - Popen(['git', 'version'], cwd=/home/app, stdin=None, shell=False, universal_newlines=False)
-2024-11-12 19:03:33,665 - git.cmd - DEBUG - Popen(['git', 'version'], cwd=/home/app, stdin=None, shell=False, universal_newlines=False)
-2024-11-12 19:03:42,919 - __main__ - INFO - load_data : 8.18 sec.
-2024-11-12 19:03:42,983 - __main__ - DEBUG - X numeric cols : Index(['cc_num', 'amt', 'zip', 'lat', 'long', 'city_pop', 'unix_time',
+2024-11-18 13:49:01,640 - __main__ - DEBUG - Current dir : /home/app
+2024-11-18 13:49:01,642 - __main__ - INFO - Training started
+2024-11-18 13:49:01,684 - git.cmd - DEBUG - Popen(['git', 'version'], cwd=/home/app, stdin=None, shell=False, universal_newlines=False)
+2024-11-18 13:49:01,686 - git.cmd - DEBUG - Popen(['git', 'version'], cwd=/home/app, stdin=None, shell=False, universal_newlines=False)
+2024-11-18 13:49:08,112 - __main__ - INFO - load_data : 5.7 sec.
+2024-11-18 13:49:08,114 - __main__ - DEBUG - X numeric cols : Index(['cc_num', 'amt', 'zip', 'lat', 'long', 'city_pop', 'unix_time',
        'merch_lat', 'merch_long'],
       dtype='object')
-2024-11-12 19:03:43,812 - __main__ - INFO - preprocess_data : 0.89 sec.
-2024-11-12 19:16:34,594 - __main__ - INFO - train_model : 770.76 sec.
-2024-11-12 19:16:38,246 - __main__ - INFO - Accuracy : 1.00
-2024-11-12 19:16:38,247 - __main__ - INFO - Precision : 0.57
-2024-11-12 19:16:38,247 - __main__ - INFO - Recall : 0.75
-2024-11-12 19:16:38,248 - __main__ - INFO - F1-Score : 0.65
-2024-11-12 19:16:38,248 - __main__ - INFO - ROC AUC Score : 0.98
-2024-11-12 19:16:39,232 - __main__ - INFO - evaluate_model : 4.64 sec.
-2024-11-12 21:14:07,390 - __main__ - INFO - log_model: 7048.16 sec.
-2024-11-12 21:14:07,490 - __main__ - INFO - run : 7833.21 sec.
-2024-11-12 21:14:08,816 - __main__ - INFO - Training time : 7835.22 sec.
-2024-11-12 21:14:08,816 - __main__ - INFO - Training stopped
+2024-11-18 13:49:08,447 - __main__ - INFO - preprocess_data : 0.33 sec.
+2024-11-18 13:49:09,257 - __main__ - INFO - train_model : 0.81 sec.
+2024-11-18 13:49:10,115 - __main__ - INFO - Accuracy : 1.00
+2024-11-18 13:49:10,116 - __main__ - INFO - Precision : 1.00
+2024-11-18 13:49:10,117 - __main__ - INFO - Recall : 0.75
+2024-11-18 13:49:10,118 - __main__ - INFO - F1-Score : 0.86
+2024-11-18 13:49:10,119 - __main__ - INFO - ROC AUC Score : 1.00
+2024-11-18 13:49:10,803 - __main__ - INFO - evaluate_model : 1.55 sec.
+2024-11-18 13:49:14,464 - __main__ - INFO - log_model: 3.66 sec.
+2024-11-18 13:49:14,558 - __main__ - INFO - run : 12.42 sec.
+2024-11-18 13:49:14,756 - __main__ - INFO - Training time : 13.13 sec.
+2024-11-18 13:49:14,757 - __main__ - INFO - Training stopped

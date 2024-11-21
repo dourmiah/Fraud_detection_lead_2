@@ -17,18 +17,19 @@ from sqlalchemy import create_engine
 import os
 
 # Configuration de la connexion à PostgreSQL
-engine = create_engine('postgresql://ubbm86a1eq2ss8:pbf5f0c749d947df6b1a99f933c7aa9ad86ce2e37a576854ee98b469453eaa6ab@c9tiftt16dc3eo.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d3khgsjcnjroca')
+# engine = create_engine('postgresql://ubbm86a1eq2ss8:pbf5f0c749d947df6b1a99f933c7aa9ad86ce2e37a576854ee98b469453eaa6ab@c9tiftt16dc3eo.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d3khgsjcnjroca')
+engine = create_engine('postgresql://u55kao1h651rg1:p2bec0f5c95b3bfca2b3ccf2413c5aa108961f5b13b6d10bd1ba46bf139fc42a8@cbdhrtd93854d5.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dg2qj03o22oh8')
 table_name = 'prediction'
 
 # Requête SQL pour lire les données de la table
 query = 'SELECT * FROM prediction'
 
 # Lire les données dans un DataFrame
-df_postgres = pd.read_sql(query, engine)
+# df_postgres = pd.read_sql(query, engine)
 
 # print("************************************************************")
-print("df_postgres : ", df_postgres)
-print("df.head : ", df_postgres.head())
+# print("df_postgres : ", df_postgres)
+# print("df.head : ", df_postgres.head())
 
 
 
@@ -42,8 +43,8 @@ producer_conf = ccloud_lib.pop_schema_registry_params_from_config(CONF)
 producer = Producer(producer_conf)
 
 # URL MLFlow
-k_MLflow_Tracking_URL = "https://fraud-202406-70e02a9739f2.herokuapp.com/"
-k_Logged_Model = "runs:/1fcd6f0ced3b491fa67f67f4d16f8712/model"
+k_MLflow_Tracking_URL = "https://dom-fraud-detection-b8aae0fd5831.herokuapp.com/"
+k_Logged_Model = "runs:/9ad626424141458d87556719c6c647be/model"
 mlflow.set_tracking_uri(k_MLflow_Tracking_URL)
 loaded_model = mlflow.sklearn.load_model(k_Logged_Model)
 
@@ -161,14 +162,14 @@ try:
             # Add new column 'prediction'
             df['prediction'] = prediction
             
-            # Send a mail if a fraud is detected
-            if prediction[0] == 1:
-                print("Fraud détectée !")
-                send_email(
-                subject='Fraud detection',
-                body='A fraudulent transaction has been detected !',
-                to_email='jedhaprojetfrauddetect@gmail.com'
-                )
+            # Send a mail if a fraud is detected => REtrouver les credentials mail
+            # if prediction[0] == 1:
+            #     print("Fraud détectée !")
+            #     send_email(
+            #     subject='Fraud detection',
+            #     body='A fraudulent transaction has been detected !',
+            #     to_email='jedhaprojetfrauddetect@gmail.com'
+            #     )
            
             # Write data to TOPIC_PREDICT
             record_key = "prediction"
@@ -187,6 +188,7 @@ try:
             # Write data to database
             df.to_sql(table_name, engine, if_exists='append', index=False)
 
+            # !!!!!!!!!!!   NE PAS AJOUTER DANS Le CODE !!!!!!!!!!!!!
             # insert into prediction 
             # (trans_date_trans_time,cc_num,merchant,category,amt,first,last,gender,street,city,state,zip,lat,long,city_pop,job,dob,trans_num,unix_time,merch_lat,merch_long,is_fraud,prediction)
             # values('2020-10-13 09:53:40','501899453424','fraud_Langosh, Wintheiser and Hyatt','food_dining',164.05,'Jessica','Dominguez','F','06393','Nancy Parkways Suite 855','Gadsden AL','35903',33.9845,-85.9077,'67082','Ceramics designer','1970-01-08','e83caea210536d9d85e7415207f962d4',1381658020,33.819701,-85.461329,'0','Not Fraud')
