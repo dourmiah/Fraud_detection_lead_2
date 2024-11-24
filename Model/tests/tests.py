@@ -8,6 +8,7 @@ from train import ModelTrainer
 def trainer():
     return ModelTrainer()
 
+trainer = ModelTrainer()
 
 # Test load_data
 @patch("pandas.read_csv")
@@ -21,7 +22,6 @@ def test_load_data(mock_read_csv):
     })
     mock_read_csv.return_value = mock_data
 
-    trainer = ModelTrainer()
     data = trainer.load_data()
 
     mock_read_csv.assert_called_once_with(file_path, nrows=5000)

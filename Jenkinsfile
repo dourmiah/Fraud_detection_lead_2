@@ -7,7 +7,6 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/dourmiah/Fraud_detection_lead_2.git'
-                
             }
         }
         stage('Build Docker Image') {
@@ -17,19 +16,28 @@ pipeline {
                 }
             }
         }
-        stage('Run Tests') {
+        stage('Debug') {
             steps {
                 script {
                     docker.image('fraud-detection-model').inside {
-                        sh 'pytest home/app/Model/tests/tests.py --junitxml=results.xml'
+                        sh 'ls -R /home/app'
                     }
                 }
             }
         }
-       stage('Run Container') {
+        stage('Run Tests') {
             steps {
                 script {
-                    sh 'docker run --rm -v "$(pwd):/home/app" fraud-detection-model'
+                    docker.image('fraud-detection-model').inside {
+                        sh 'pytest /home/app/Model/tests/tests.py --junitxml=results.xml'
+                    }
+                }
+            }
+        }
+        stage('Run Container') {
+            steps {
+                script {
+                    sh 'docker run --rm -v "$(pwd):/home/app" fraud-detection-model sh -c "ls -R /home/app"'
                 }
             }
         }
@@ -37,11 +45,9 @@ pipeline {
     post {
         success {
             echo 'Pipeline completed successfully !'
-            // Send email notification
         }
         failure {
             echo 'Pipeline failed.'
-            // Send email notification
         }
     }
 }
