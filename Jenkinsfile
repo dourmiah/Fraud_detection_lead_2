@@ -19,11 +19,14 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        // Les variables d'environnement sont automatiquement injectées
-                        sh """
-                            pytest --junitxml=results.xml
-                        """
+                    withCredentials([string(credentialsId: 'APP_URI', variable: 'APP_URI')]) {
+                        docker.image(DOCKER_IMAGE).inside {
+                            // Les variables sont injectées temporairement ici
+                            sh """
+                                echo "Testing APP_URI: $APP_URI"
+                                pytest --junitxml=results.xml
+                            """
+                        }
                     }
                 }
             }
@@ -31,12 +34,14 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh """
-                            echo "Running the container with injected environment variables"
-                            env | grep APP_URI // Vérifie si les variables sont bien injectées
-                            ls -R /home/app
-                        """
+                    withCredentials([string(credentialsId: 'APP_URI', variable: 'APP_URI')]) {
+                        docker.image(DOCKER_IMAGE).inside {
+                            sh """
+                                echo "Running the container with APP_URI=$APP_URI"
+                                env | grep APP_URI
+                                ls -R /home/app
+                            """
+                        }
                     }
                 }
             }
