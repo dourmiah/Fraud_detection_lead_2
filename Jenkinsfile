@@ -29,8 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.image('fraud-detection-model').inside {
-                        sh 'export PYTHONPATH=$PYTHONPATH:/home/app/Model'
-                        sh 'pytest /home/app/Model/tests/tests.py --junitxml=results.xml'
+                        sh 'pytest --junitxml=results.xml'
                     }
                 }
             }
