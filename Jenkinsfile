@@ -21,6 +21,7 @@ pipeline {
             steps {
                 sh 'export $(cat $ENV_FILE | xargs)'
             }
+        }
         stage('Run Tests') {
             steps {
                 script {
