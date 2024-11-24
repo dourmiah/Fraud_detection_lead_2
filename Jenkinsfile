@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "fraud-detection-model"
+        ENV_FILE = 'secrets.env'
     }
     stages {
         stage('Clone Repository') {
@@ -16,15 +17,10 @@ pipeline {
                 }
             }
         }
-        stage('Debug') {
+        stage('Load Environment Variables') {
             steps {
-                script {
-                    docker.image('fraud-detection-model').inside {
-                        sh 'ls -R /home/app'
-                    }
-                }
+                sh 'export $(cat $ENV_FILE | xargs)'
             }
-        }
         stage('Run Tests') {
             steps {
                 script {
@@ -37,7 +33,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh 'docker run --rm -v "$(pwd):/home/app" fraud-detection-model sh -c "ls -R /home/app"'
+                    sh 'docker run --rm --env-file=${ENV_FILE} -v "$(pwd):/home/app" fraud-detection-model sh -c "ls -R /home/app"'
                 }
             }
         }
