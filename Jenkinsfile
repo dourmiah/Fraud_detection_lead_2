@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     docker.image('fraud-detection-model').inside {
-                        sh 'pytest tests/tests.py --junitxml=results.xml'
+                        sh 'pytest home/app/Model/tests/tests.py --junitxml=results.xml'
                     }
                 }
             }

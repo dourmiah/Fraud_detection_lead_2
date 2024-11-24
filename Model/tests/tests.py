@@ -32,24 +32,24 @@ def test_load_data(mock_read_csv):
 
 
 # # Test preprocess_data
-# def test_preprocess_data(trainer):
+def test_preprocess_data():
    
-#     mock_data = pd.DataFrame({
-#     "col1": [1, 2, 3, 4, 5, 6],
-#     "col2": [5, 6, 7, 8, 9, 10],
-#     "is_fraud": [0, 1, 0, 1, 0, 1],  
-# })
+    mock_data = pd.DataFrame({
+    "col1": [1, 2, 3, 4, 5, 6],
+    "col2": [5, 6, 7, 8, 9, 10],
+    "is_fraud": [0, 1, 0, 1, 0, 1],  
+})
 
-#     X_train, X_test, y_train, y_test = trainer.preprocess_data(mock_data)
+    X_train, X_test, y_train, y_test = trainer.preprocess_data(mock_data)
 
-#     assert isinstance(X_train, pd.DataFrame)
-#     assert isinstance(X_test, pd.DataFrame)
-#     assert isinstance(y_train, pd.Series)
-#     assert isinstance(y_test, pd.Series)
-#     assert X_train.shape[0] > 0
-#     assert y_train.shape[0] > 0
-#     assert "col1" in X_train.columns
-#     assert "is_fraud" not in X_train.columns
+    assert isinstance(X_train, pd.DataFrame)
+    assert isinstance(X_test, pd.DataFrame)
+    assert isinstance(y_train, pd.Series)
+    assert isinstance(y_test, pd.Series)
+    assert X_train.shape[0] > 0
+    assert y_train.shape[0] > 0
+    assert "col1" in X_train.columns
+    assert "is_fraud" not in X_train.columns
 
 
 # # Test pour la fonction `train_model`
