@@ -2,7 +2,6 @@ import os
 import sys
 import time
 import mlflow
-import sklearn
 import logging
 import datetime
 
@@ -33,8 +32,9 @@ import pickle
 
 author = "Dominique"
 nb_estimators = 150
-# S3_uri = 
-file_path = "../data/fraudTest.csv"
+file_path = "https://dom-jedha-bucket.s3.eu-west-3.amazonaws.com/data/fraudTest.csv"
+
+mlflow.set_tracking_uri(os.environ["APP_URI"])
 
 
 # Model trainer class
@@ -42,18 +42,19 @@ class ModelTrainer:
 
     # Constructor
     def __init__(self) -> None:
-        pass
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.numeric_columns = []
         return
 
     # Data loading
     def load_data(self) -> pd.DataFrame:
         start_time = time.time()
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(file_path, nrows=5000)
 
-        # Delete first column (type identity)
+        # Delete first column (type identity !)
         data = data.iloc[:, 1:]
 
-        logger.info(f"load_data : {round(time.time() - start_time, 2)} sec.")
+        self.logger.info(f"load_data : {round(time.time() - start_time, 2)} sec.")
         return data
 
     # Data preprocessing 
@@ -62,44 +63,66 @@ class ModelTrainer:
         X = df.drop("is_fraud", axis=1)
         y = df["is_fraud"]
 
-        self.numeric_columns = X.select_dtypes(include="number").columns
-        logger.debug(f"X numeric cols : {self.numeric_columns}")
+        self.numeric_columns = X.select_dtypes(include="number").columns.tolist()
+        self.logger.debug(f"X numeric cols : {self.numeric_columns}")
 
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+        # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(X[self.numeric_columns], y, test_size=0.2, stratify=y, random_state=42)
 
+        preprocessor = StandardScaler()
+        X_train_scaled = preprocessor.fit_transform(X_train)
+        X_test_scaled = preprocessor.transform(X_test)
+
+        # Reconvert into Dataframe
+        X_train = pd.DataFrame(X_train_scaled, columns=self.numeric_columns, index=X_train.index)
+        X_test = pd.DataFrame(X_test_scaled, columns=self.numeric_columns, index=X_test.index)
+
+         # Apply SMOTE to rebalance the target class 
+        sm = SMOTE(random_state=50)
+        X_train, y_train = sm.fit_resample(X_train, y_train)
+    
+        # Save the preprocessor 
+        with open('preprocessor_model.pkl', "wb") as file:
+            pickle.dump(preprocessor, file)
+
+        # Log metrics and params into Mlflow
         mlflow.log_param("Train set size", len(X_train))
         mlflow.log_param("Test set size", len(X_test))
-
         mlflow.log_metric("preprocess_data_time", round(time.time() - start_time, 2))
-        logger.info(f"preprocess_data : {round(time.time() - start_time, 2)} sec.")
+        self.logger.info(f"preprocess_data : {round(time.time() - start_time, 2)} sec.")
+        
         return X_train, X_test, y_train, y_test
 
     # Train model
-    def train_model(self, X_train: pd.DataFrame, y_train: pd.Series) -> ImbPipeline:
+    def train_model(self, X_train: pd.DataFrame, y_train: pd.Series) -> RandomForestClassifier:
         start_time = time.time()
 
         # SMOTE + RandomForest in a pipeline
-        model_pipeline: ImbPipeline = ImbPipeline(
-            steps=[
-                ("scaler", StandardScaler()),
-                ("smote", SMOTE(random_state=42)),
-                ("classifier", RandomForestClassifier(n_estimators=nb_estimators, random_state=42, class_weight="balanced")),
-            ]
-        )
+        # model_pipeline: ImbPipeline = ImbPipeline(
+        #     steps=[
+        #         ("scaler", StandardScaler()),
+        #         ("smote", SMOTE(random_state=42)),
+        #         ("classifier", RandomForestClassifier(n_estimators=nb_estimators, random_state=42, class_weight="balanced")),
+        #     ]
+        # )
 
-        model_pipeline.fit(X_train[self.numeric_columns], y_train)
+        # Train model
+        model = RandomForestClassifier(n_estimators=nb_estimators, random_state=42, class_weight="balanced")
+        model.fit(X_train[self.numeric_columns], y_train)
 
+        # Save model
         with open('randomforest_model.pkl', 'wb') as file:
-            joblib.dump(model_pipeline, file)
+            joblib.dump(model, file)
 
+        # Log metrics
         mlflow.log_metric("train_model_time", round(time.time() - start_time, 2))
-        logger.info(f"train_model : {round(time.time() - start_time, 2)} sec.")
-        return model_pipeline
+        self.logger.info(f"train_model : {round(time.time() - start_time, 2)} sec.")
+        return model
 
     # Model assessment
     def evaluate_model(
         self,
-        model_pipeline: ImbPipeline,
+        model: RandomForestClassifier,
         X_train: pd.DataFrame,
         X_test: pd.DataFrame,
         y_train: pd.Series,
@@ -108,8 +131,8 @@ class ModelTrainer:
 
         start_time = time.time()
 
-        y_pred = model_pipeline.predict(X_test[self.numeric_columns])
-        y_pred_proba = model_pipeline.predict_proba(X_test[self.numeric_columns])[:, 1]
+        y_pred = model.predict(X_test[self.numeric_columns])
+        y_pred_proba = model.predict_proba(X_test[self.numeric_columns])[:, 1]
 
         accuracy = accuracy_score(y_test, y_pred)
         precision = precision_score(y_test, y_pred)
@@ -124,11 +147,11 @@ class ModelTrainer:
         mlflow.log_metric("F1 Score", round(f1, 2))
         mlflow.log_metric("ROC AUC Score", round(roc_auc, 2))
 
-        logger.info(f"Accuracy : {accuracy:.2f}")
-        logger.info(f"Precision : {precision:.2f}")
-        logger.info(f"Recall : {recall:.2f}")
-        logger.info(f"F1-Score : {f1:.2f}")
-        logger.info(f"ROC AUC Score : {roc_auc:.2f}")
+        self.logger.info(f"Accuracy : {accuracy:.2f}")
+        self.logger.info(f"Precision : {precision:.2f}")
+        self.logger.info(f"Recall : {recall:.2f}")
+        self.logger.info(f"F1-Score : {f1:.2f}")
+        self.logger.info(f"ROC AUC Score : {roc_auc:.2f}")
 
         fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
         plt.figure()
@@ -164,7 +187,7 @@ class ModelTrainer:
         mlflow.log_artifact(title)
 
         mlflow.log_metric("evaluate_model_time", round(time.time() - start_time, 2))
-        logger.info(f"evaluate_model : {round(time.time() - start_time, 2)} sec.")
+        self.logger.info(f"evaluate_model : {round(time.time() - start_time, 2)} sec.")
 
         return
 
@@ -178,7 +201,7 @@ class ModelTrainer:
         return
 
     # Logs model in MLFlow
-    def log_model(self, model_pipeline: ImbPipeline, X_train: pd.DataFrame, y_train: pd.Series) -> None:
+    def log_model(self, model: RandomForestClassifier, X_train: pd.DataFrame, y_train: pd.Series) -> None:
         start_time = time.time()
 
         # Infer model signature
@@ -186,15 +209,15 @@ class ModelTrainer:
 
         # Log the model with MLflow
         mlflow.sklearn.log_model(
-            sk_model=model_pipeline,
+            sk_model=model,
             artifact_path="model",
             registered_model_name="random_forest",
-            signature=signature
+            signature=signature,
         )
 
         # Log the time spent to log the model
         mlflow.log_metric("log_model_time", round(time.time() - start_time, 2))
-        logger.info(f"log_model: {round(time.time() - start_time, 2)} sec.")
+        self.logger.info(f"log_model: {round(time.time() - start_time, 2)} sec.")
         return
 
     # Start the process
@@ -210,7 +233,7 @@ class ModelTrainer:
             self.log_model(model_pipeline, X_train, y_train)
 
             mlflow.log_metric("total_run_time", round(time.time() - start_time, 2))
-            logger.info(f"run : {round(time.time() - start_time, 2)} sec.")
+            self.logger.info(f"run : {round(time.time() - start_time, 2)} sec.")
 
 
 if __name__ == "__main__":

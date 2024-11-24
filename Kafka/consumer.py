@@ -44,7 +44,7 @@ producer = Producer(producer_conf)
 
 # URL MLFlow
 k_MLflow_Tracking_URL = "https://dom-fraud-detection-b8aae0fd5831.herokuapp.com/"
-k_Logged_Model = "runs:/9ad626424141458d87556719c6c647be/model"
+k_Logged_Model = "runs:/ec18c5a8712c46aba841b47e9935751e/model"
 mlflow.set_tracking_uri(k_MLflow_Tracking_URL)
 loaded_model = mlflow.sklearn.load_model(k_Logged_Model)
 
