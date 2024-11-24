@@ -1,8 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = "fraud-detection-model"
-        ENV_FILE = 'secrets.env'
+        DOCKER_IMAGE = "fraud-detection-model" // Nom de l'image Docker
     }
     stages {
         stage('Clone Repository') {
@@ -20,9 +19,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside("-e APP_URI=${env.APP_URI}") { 
+                    docker.image(DOCKER_IMAGE).inside {
+                        // Les variables d'environnement sont automatiquement injectées
                         sh """
-                            export \$(cat ${ENV_FILE} | xargs)
                             pytest --junitxml=results.xml
                         """
                     }
@@ -32,9 +31,13 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh """
-                        docker run --rm --env-file=${ENV_FILE} -v "\$(pwd):/home/app" ${DOCKER_IMAGE} sh -c "ls -R /home/app"
-                    """
+                    docker.image(DOCKER_IMAGE).inside {
+                        sh """
+                            echo "Running the container with injected environment variables"
+                            env | grep APP_URI // Vérifie si les variables sont bien injectées
+                            ls -R /home/app
+                        """
+                    }
                 }
             }
         }
