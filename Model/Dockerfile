@@ -13,3 +13,4 @@ RUN ./aws/install
 COPY requirements.txt /dependencies/requirements.txt
 COPY . .
 RUN pip install -r /dependencies/requirements.txt
+ENV PYTHONPATH=/home/app

@@ -6,20 +6,21 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/dourmiah/paycare.git'
+                git branch: 'main', url: 'https://github.com/dourmiah/Fraud_detection_lead_2.git'
+                
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('paycare-image:latest')
+                    docker.build('fraud-detection-model')
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    docker.image('paycare-image:latest').inside {
+                    docker.image('fraud-detection-model').inside {
                         sh 'pytest tests/tests.py --junitxml=results.xml'
                     }
                 }
@@ -28,7 +29,7 @@ pipeline {
        stage('Run Container') {
             steps {
                 script {
-                    sh 'docker run --rm -v "$(pwd):/home/app" ${DOCKER_IMAGE}'
+                    sh 'docker run --rm -v "$(pwd):/home/app" fraud-detection-model'
                 }
             }
         }
