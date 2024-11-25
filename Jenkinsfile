@@ -51,14 +51,14 @@ pipeline {
             emailext (
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Good news! Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' succeeded.",
-                to: "jedhaprojetfrauddetect@gmail.com"
+                to: "dominique23@orange.fr"
             )
         }
         failure {
             emailext (
                 subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Unfortunately, Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed.\nCheck the logs at: ${env.BUILD_URL}",
-                to: "jedhaprojetfrauddetect@gmail.com"
+                to: "dominique23@orange.fr"
             )
         }
     }
