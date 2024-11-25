@@ -17,8 +17,7 @@ from sqlalchemy import create_engine
 import os
 
 # Configuration de la connexion à PostgreSQL
-# engine = create_engine('postgresql://ubbm86a1eq2ss8:pbf5f0c749d947df6b1a99f933c7aa9ad86ce2e37a576854ee98b469453eaa6ab@c9tiftt16dc3eo.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d3khgsjcnjroca')
-engine = create_engine('postgresql://u55kao1h651rg1:p2bec0f5c95b3bfca2b3ccf2413c5aa108961f5b13b6d10bd1ba46bf139fc42a8@cbdhrtd93854d5.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dg2qj03o22oh8')
+engine = create_engine(os.environ["BDD_URI"])
 table_name = 'prediction'
 
 # Requête SQL pour lire les données de la table
