@@ -1,5 +1,6 @@
 . "./secrets.ps1"
 
+
 # Remote
 docker run -it -p 4000:4000 `
 -v "$(pwd):/home/app" `
