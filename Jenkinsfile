@@ -19,7 +19,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'APP_URI', variable: 'APP_URI')]) {
+                    withCredentials([string(credentialsId: "APP_URI", variable: "APP_URI")]) {
                         docker.image(DOCKER_IMAGE).inside {
                             // Les variables sont injectées temporairement ici
                             sh """
@@ -34,7 +34,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'APP_URI', variable: 'APP_URI')]) {
+                    withCredentials([string(credentialsId: "APP_URI", variable: "APP_URI")]) {
                         docker.image(DOCKER_IMAGE).inside {
                             sh """
                                 echo "Running the container with APP_URI=$APP_URI"
