@@ -39,7 +39,6 @@ pipeline {
                             sh """
                                 echo "Running the container with APP_URI=$APP_URI"
                                 env | grep APP_URI
-                                ls -R /home/app
                             """
                         }
                     }
@@ -49,10 +48,28 @@ pipeline {
     }
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            script {
+                echo "Success"
+                emailext(
+                    subject: "Jenkins Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """<p>Good news!</p>
+                             <p>The build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> was successful.</p>
+                             <p>View the details <a href="${env.BUILD_URL}">here</a>.</p>""",
+                    to: 'antoine@jedha.co'
+                )
+            }
         }
         failure {
-            echo 'Pipeline failed.'
+            script {
+                echo "Failure"
+                emailext(
+                    subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """<p>Unfortunately, the build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> has failed.</p>
+                             <p>Please check the logs and address the issues.</p>
+                             <p>View the details <a href="${env.BUILD_URL}">here</a>.</p>""",
+                    to: 'antoine@jedha.co'
+                )
+            }
         }
     }
 }
