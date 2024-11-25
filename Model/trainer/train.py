@@ -235,7 +235,7 @@ class ModelTrainer:
             mlflow.log_metric("total_run_time", round(time.time() - start_time, 2))
             self.logger.info(f"run : {round(time.time() - start_time, 2)} sec.")
 
-# Main
+
 if __name__ == "__main__":
 
     start_time = time.time()
