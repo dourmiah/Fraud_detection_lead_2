@@ -9,6 +9,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import (BranchPythonOperator,
                                                PythonOperator)
 from airflow.sensors.python import PythonSensor
+from airflow.operators.email_operator import EmailOperator
 
 from evidently.test_suite import TestSuite
 from evidently.test_preset import DataStabilityTestPreset
@@ -61,7 +62,7 @@ def _detect_data_drift(**context):
     reference, data_logs = _load_files(data_logs_filename)
 
     data_drift_report = Report(metrics=[
-        DataDriftPreset(),
+        DataDriftPreset(stattest_threshold=0.1),
     ])
 
     data_drift_report.run(current_data=data_logs, reference_data=reference, column_mapping=None)
@@ -95,23 +96,52 @@ def _clean_file(**context):
 
 with DAG(dag_id="drift_detection_dag", default_args=default_args, schedule_interval="0 16 * * *", catchup=False) as dag:
     
-    # Detect file when a newone is added into ./data/data-drift'''
+    # Détecte un nouveau fichier dans le répertoire
     detect_file = PythonSensor(
         task_id="detect_file",
         python_callable=_detect_file,
-        poke_interval = 20, 
-        timeout = 60, 
-        mode = "poke"
+        poke_interval=20,
+        timeout=60,
+        mode="poke",
     )
 
-    detect_data_drift = BranchPythonOperator(task_id="detect_data_drift", python_callable=_detect_data_drift)
+    # Vérifie la présence de drift dans les données
+    detect_data_drift = BranchPythonOperator(
+        task_id="detect_data_drift",
+        python_callable=_detect_data_drift,
+    )
 
-    data_drift_detected = PythonOperator(task_id="data_drift_detected", python_callable=_data_drift_detected)
+    # Actions en cas de drift
+    data_drift_detected = PythonOperator(
+        task_id="data_drift_detected",
+        python_callable=_data_drift_detected,
+    )
 
+    # Tâche d'envoi de l'email
+    send_email = EmailOperator(
+        task_id="send_email",
+        to="jedhaprojetfrauddetect2@gmail.com",
+        subject="Data Drift Detected",
+        html_content="<p>Data drift has been detected. Please review the report attached.</p>",
+    )
+
+    # Aucune action en cas d'absence de drift
     no_data_drift_detected = DummyOperator(task_id="no_data_drift_detected")
 
-    clean_file = PythonOperator(task_id="clean_file", python_callable=_clean_file, trigger_rule="one_success")
+    # Nettoyage du fichier
+    clean_file = PythonOperator(
+        task_id="clean_file",
+        python_callable=_clean_file,
+        trigger_rule="one_success",  # Exécute cette tâche si au moins une tâche précédente réussit
+    )
 
+    # Fin du pipeline
     end = DummyOperator(task_id="end")
 
-    detect_file >> detect_data_drift >> [data_drift_detected, no_data_drift_detected] >> clean_file >> end
+    # Configuration des dépendances
+    # detect_file >> detect_data_drift >> [data_drift_detected, no_data_drift_detected] >> clean_file >> end
+
+    # Avec envoi email
+    detect_file >> detect_data_drift
+    detect_data_drift >> data_drift_detected >> send_email >> clean_file >> end
+    detect_data_drift >> no_data_drift_detected >> clean_file >> end

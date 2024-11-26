@@ -1,8 +1,7 @@
 # files to ignore
 secrets.ps1
-secrets.env
 .env
-# *.log
+.log
 
 # directories to ignore
 .git/
