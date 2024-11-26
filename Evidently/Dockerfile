@@ -4,6 +4,4 @@ COPY requirements.txt .
 USER airflow
 RUN pip install -r requirements.txt
 
-# RUN pip install --no-cache-dir evidently
-
 RUN pip uninstall dataclasses -y

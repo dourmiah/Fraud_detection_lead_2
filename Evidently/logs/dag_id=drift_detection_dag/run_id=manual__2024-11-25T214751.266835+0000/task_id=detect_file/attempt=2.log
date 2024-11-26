@@ -1,0 +1,31 @@
+[2024-11-25T22:06:48.932+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file manual__2024-11-25T21:47:51.266835+00:00 [queued]>
+[2024-11-25T22:06:48.951+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file manual__2024-11-25T21:47:51.266835+00:00 [queued]>
+[2024-11-25T22:06:48.952+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 1
+[2024-11-25T22:06:48.981+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-25 21:47:51.266835+00:00
+[2024-11-25T22:06:48.997+0000] {standard_task_runner.py:57} INFO - Started process 113 to run task
+[2024-11-25T22:06:49.003+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'manual__2024-11-25T21:47:51.266835+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp00k1d0px']
+[2024-11-25T22:06:49.009+0000] {standard_task_runner.py:85} INFO - Job 14: Subtask detect_file
+[2024-11-25T22:06:49.099+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file manual__2024-11-25T21:47:51.266835+00:00 [running]> on host 7f10b2294d44
+[2024-11-25T22:06:49.210+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-25T21:47:51.266835+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-25T21:47:51.266835+00:00'
+[2024-11-25T22:06:49.212+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab227700>
+[2024-11-25T22:07:49.269+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab227700>
+[2024-11-25T22:08:49.326+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab227700>
+[2024-11-25T22:09:25.702+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2024-11-25T22:09:25.707+0000] {process_utils.py:131} INFO - Sending 15 to group 113. PIDs of all processes in the group: [113]
+[2024-11-25T22:09:25.708+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 113
+[2024-11-25T22:09:25.709+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-11-25T22:09:25.729+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/sensors/base.py", line 285, in execute
+    time.sleep(self._get_next_poke_interval(started_at, run_duration, try_number))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2024-11-25T22:09:25.743+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=drift_detection_dag, task_id=detect_file, execution_date=20241125T214751, start_date=20241125T220648, end_date=20241125T220925
+[2024-11-25T22:09:25.790+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 14 for task detect_file ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(drift_detection_dag, detect_file, manual__2024-11-25T21:47:51.266835+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'detect_file', 'dag_id': 'drift_detection_dag', 'run_id': 'manual__2024-11-25T21:47:51.266835+00:00', 'map_index': -1, 'start_date': datetime.datetime(2024, 11, 25, 22, 6, 48, 933704, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2024, 11, 25, 22, 9, 25, 742438, tzinfo=Timezone('UTC')), 'duration': 156}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 113)
+[2024-11-25T22:09:25.856+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=113, status='terminated', exitcode=1, started='22:06:48') (113) terminated with exit code 1

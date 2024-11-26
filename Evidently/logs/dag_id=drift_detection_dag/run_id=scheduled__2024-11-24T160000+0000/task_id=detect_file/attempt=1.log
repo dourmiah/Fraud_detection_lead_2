@@ -1,0 +1,442 @@
+[2024-11-25T17:22:33.156+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T17:22:33.196+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T17:22:33.197+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T17:22:33.236+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T17:22:33.254+0000] {standard_task_runner.py:57} INFO - Started process 178 to run task
+[2024-11-25T17:22:33.260+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpaqrk8ijv']
+[2024-11-25T17:22:33.270+0000] {standard_task_runner.py:85} INFO - Job 4: Subtask detect_file
+[2024-11-25T17:22:33.468+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host 52f638c944a9
+[2024-11-25T17:22:33.654+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T17:22:33.666+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:23:33.718+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:24:33.775+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:25:33.832+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:26:33.893+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:27:33.947+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:28:34.005+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:29:34.062+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:30:34.120+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:31:34.178+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:32:34.236+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:33:34.299+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:34:34.352+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:35:34.414+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:36:34.425+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:37:34.486+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:38:34.543+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:39:34.600+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:40:34.658+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:41:34.707+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:42:34.764+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:43:34.816+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:44:34.880+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:45:34.938+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:46:34.996+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:47:35.054+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:48:35.111+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:49:35.169+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:50:35.226+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:51:35.285+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:52:35.343+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:53:35.401+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:54:35.459+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:55:35.519+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:56:35.580+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:57:35.636+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:58:35.694+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T17:59:35.751+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:00:35.809+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:01:35.827+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:02:35.890+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:03:35.900+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:04:35.961+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:05:36.018+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:06:36.076+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:07:36.134+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:08:36.190+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:09:36.249+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:10:36.305+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:11:36.367+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:12:36.421+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:13:36.480+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:14:36.534+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:15:36.596+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:16:36.654+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:17:36.710+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:18:36.771+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:19:36.779+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:20:36.836+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:21:36.898+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:22:36.952+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:23:36.962+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:24:37.019+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:25:37.077+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:26:37.135+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:27:37.193+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:28:37.253+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:29:37.289+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:30:37.347+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:31:37.412+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:32:37.473+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:33:37.504+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:34:37.560+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:35:37.617+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:36:37.675+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:37:37.732+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:38:37.790+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:39:37.847+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:40:37.905+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:41:37.967+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:42:38.024+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:43:38.079+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:44:38.136+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:45:38.196+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:46:38.252+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:47:38.311+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:48:38.371+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:49:38.421+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:50:38.474+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:51:38.532+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:52:38.591+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:53:38.649+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:54:38.707+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:55:38.765+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:56:38.819+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:57:38.872+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:58:38.931+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T18:59:38.993+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:00:39.077+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:01:39.135+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:02:39.182+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:03:39.235+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:04:39.290+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:05:39.348+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:06:39.406+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:07:39.468+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:08:39.523+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:09:39.581+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:10:39.639+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:11:39.696+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:12:39.755+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:13:39.817+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:14:39.872+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:15:39.929+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:16:39.988+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:17:40.046+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:18:40.104+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:19:40.164+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:20:40.167+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:21:40.229+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:22:40.290+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:23:40.344+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:24:40.402+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:25:40.455+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:26:40.495+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:27:40.547+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:28:40.605+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:29:40.667+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:30:40.722+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:31:40.779+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:32:40.838+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:33:40.896+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:34:40.954+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:35:41.009+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:36:41.074+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:37:41.139+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:38:41.200+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:39:41.258+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:40:41.312+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:41:41.360+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:42:41.418+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:43:41.476+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:44:41.534+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:45:41.579+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:46:41.641+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:47:41.702+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:48:41.756+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:49:41.766+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:50:41.793+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:51:41.837+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:52:41.874+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:53:41.927+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:54:41.985+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:55:42.042+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:56:42.100+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:57:42.160+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:58:42.215+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T19:59:42.274+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:00:42.319+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:01:42.381+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:02:42.438+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:03:42.499+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:04:42.529+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:05:42.591+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:06:42.649+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:07:42.707+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:08:42.748+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:09:42.805+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:10:42.861+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:11:42.919+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:12:42.957+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:13:42.963+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:14:43.022+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:15:43.080+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:16:43.140+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:17:43.174+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:38:24.070+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fc38685cee0>
+[2024-11-25T20:39:23.179+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2024-11-25T20:39:23.302+0000] {process_utils.py:131} INFO - Sending 15 to group 178. PIDs of all processes in the group: [178]
+[2024-11-25T20:39:23.304+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 178
+[2024-11-25T20:39:23.310+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-11-25T20:39:23.961+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=178, status='terminated', exitcode=0, started='17:22:33') (178) terminated with exit code 0
+[2024-11-25T21:03:29.523+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T21:03:29.532+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T21:03:29.533+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T21:03:29.551+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T21:03:29.567+0000] {standard_task_runner.py:57} INFO - Started process 172 to run task
+[2024-11-25T21:03:29.573+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpjwirg493']
+[2024-11-25T21:03:29.577+0000] {standard_task_runner.py:85} INFO - Job 4: Subtask detect_file
+[2024-11-25T21:03:29.683+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host e252fbffc21c
+[2024-11-25T21:03:29.805+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T21:03:29.807+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f57316b0dc0>
+[2024-11-25T21:03:29.843+0000] {base.py:287} INFO - Success criteria met. Exiting.
+[2024-11-25T21:03:29.858+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=detect_file, execution_date=20241124T160000, start_date=20241125T210329, end_date=20241125T210329
+[2024-11-25T21:03:29.945+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-25T21:03:30.014+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-25T21:38:42.174+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T21:38:42.190+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T21:38:42.191+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T21:38:42.235+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T21:38:42.258+0000] {standard_task_runner.py:57} INFO - Started process 225 to run task
+[2024-11-25T21:38:42.273+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpdts9h2rv']
+[2024-11-25T21:38:42.287+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask detect_file
+[2024-11-25T21:38:42.589+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host 7f10b2294d44
+[2024-11-25T21:38:42.769+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T21:38:42.771+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:39:42.783+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:40:42.839+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:41:42.896+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:42:42.955+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:43:43.014+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:44:43.072+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:45:43.131+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:46:43.190+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:47:43.248+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:48:43.267+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:49:43.315+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:50:43.373+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:51:43.431+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:52:43.490+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:53:43.547+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:54:43.607+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:55:43.663+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:56:43.721+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:57:43.779+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:58:43.837+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T21:59:43.895+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:00:43.953+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:01:44.009+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:02:44.068+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:03:44.126+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:04:44.184+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7fe7e20c3f70>
+[2024-11-25T22:24:21.501+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T22:24:21.515+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T22:24:21.517+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T22:24:21.551+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T22:24:21.561+0000] {standard_task_runner.py:57} INFO - Started process 749 to run task
+[2024-11-25T22:24:21.566+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp3f6p74xf']
+[2024-11-25T22:24:21.572+0000] {standard_task_runner.py:85} INFO - Job 17: Subtask detect_file
+[2024-11-25T22:24:21.645+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host 7f10b2294d44
+[2024-11-25T22:24:21.745+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T22:24:21.747+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:25:21.806+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:26:21.814+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:27:21.871+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:28:21.928+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:29:21.986+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:30:22.042+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:31:22.100+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:32:22.137+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:33:22.196+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:34:22.252+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:35:22.311+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:36:22.367+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:37:22.426+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:38:22.486+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:39:22.490+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:40:22.547+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:41:22.605+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:42:22.663+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:43:22.700+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:44:22.753+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:45:22.807+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:46:22.864+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:47:22.894+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:48:22.951+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:49:23.009+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:50:23.066+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:51:23.123+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:52:23.183+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:53:23.189+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:54:23.227+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:55:23.285+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:56:23.342+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:57:23.400+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:58:23.457+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T22:59:23.515+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:00:23.573+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:01:23.631+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:02:23.688+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:03:23.696+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:04:23.755+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:05:23.810+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:06:23.868+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:07:23.926+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:08:23.984+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:09:24.042+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:10:24.100+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:11:24.158+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:12:24.216+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:13:24.274+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:14:24.332+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:15:24.390+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:16:24.448+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:17:24.505+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:18:24.562+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:19:24.624+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:20:24.677+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:21:24.734+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:22:24.792+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:23:24.850+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:24:24.907+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab26c790>
+[2024-11-25T23:25:03.529+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to restarting. Terminating instance.
+[2024-11-25T23:25:03.636+0000] {process_utils.py:131} INFO - Sending 15 to group 749. PIDs of all processes in the group: [749]
+[2024-11-25T23:25:03.638+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 749
+[2024-11-25T23:25:03.644+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-11-25T23:25:03.991+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/sensors/base.py", line 285, in execute
+    time.sleep(self._get_next_poke_interval(started_at, run_duration, try_number))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2024-11-25T23:25:04.069+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=drift_detection_dag, task_id=detect_file, execution_date=20241124T160000, start_date=20241125T222421, end_date=20241125T232504
+[2024-11-25T23:25:04.242+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 17 for task detect_file (Task received SIGTERM signal; 749)
+[2024-11-25T23:25:04.335+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=749, status='terminated', exitcode=1, started='22:24:21') (749) terminated with exit code 1
+[2024-11-25T23:27:32.440+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T23:27:32.450+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T23:27:32.451+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T23:27:32.465+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T23:27:32.474+0000] {standard_task_runner.py:57} INFO - Started process 3095 to run task
+[2024-11-25T23:27:32.478+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpd3led1st']
+[2024-11-25T23:27:32.482+0000] {standard_task_runner.py:85} INFO - Job 28: Subtask detect_file
+[2024-11-25T23:27:32.535+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host 7f10b2294d44
+[2024-11-25T23:27:32.617+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T23:27:32.619+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:28:12.870+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2024-11-25T23:28:12.874+0000] {process_utils.py:131} INFO - Sending 15 to group 3095. PIDs of all processes in the group: [3095]
+[2024-11-25T23:28:12.875+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 3095
+[2024-11-25T23:28:12.876+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-11-25T23:28:12.886+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/sensors/base.py", line 285, in execute
+    time.sleep(self._get_next_poke_interval(started_at, run_duration, try_number))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2024-11-25T23:28:12.891+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=drift_detection_dag, task_id=detect_file, execution_date=20241124T160000, start_date=20241125T232732, end_date=20241125T232812
+[2024-11-25T23:28:12.906+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 28 for task detect_file ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(drift_detection_dag, detect_file, scheduled__2024-11-24T16:00:00+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'detect_file', 'dag_id': 'drift_detection_dag', 'run_id': 'scheduled__2024-11-24T16:00:00+00:00', 'map_index': -1, 'start_date': datetime.datetime(2024, 11, 25, 23, 27, 32, 441819, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2024, 11, 25, 23, 28, 12, 891183, tzinfo=Timezone('UTC')), 'duration': 40}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 3095)
+[2024-11-25T23:28:12.968+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=3095, status='terminated', exitcode=1, started='23:27:32') (3095) terminated with exit code 1
+[2024-11-25T23:28:46.766+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T23:28:46.778+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-25T23:28:46.779+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-25T23:28:46.799+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonSensor): detect_file> on 2024-11-24 16:00:00+00:00
+[2024-11-25T23:28:46.808+0000] {standard_task_runner.py:57} INFO - Started process 3157 to run task
+[2024-11-25T23:28:46.812+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_file', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp64jmcilm']
+[2024-11-25T23:28:46.816+0000] {standard_task_runner.py:85} INFO - Job 29: Subtask detect_file
+[2024-11-25T23:28:46.880+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_file scheduled__2024-11-24T16:00:00+00:00 [running]> on host 7f10b2294d44
+[2024-11-25T23:28:46.983+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-25T23:28:46.985+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:29:47.045+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:30:47.097+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:31:47.155+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:32:47.214+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:33:47.263+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:34:47.320+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:35:47.380+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:36:47.436+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:37:47.494+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:38:47.553+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:39:47.613+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:40:47.670+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:41:47.727+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:42:47.786+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:43:47.844+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:44:47.901+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:45:47.952+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:46:48.012+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:47:48.072+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:48:48.122+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:49:48.180+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:50:48.238+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:51:48.286+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:52:48.343+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:53:48.401+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:54:48.459+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:55:48.495+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:56:48.553+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:57:48.611+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:58:48.669+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-25T23:59:48.726+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:00:48.785+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:01:48.840+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:02:48.898+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:03:48.958+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:04:49.014+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:05:49.071+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:06:49.129+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:07:49.187+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:08:49.244+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:09:49.302+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:10:49.360+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:11:49.418+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:12:49.475+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:13:49.508+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:14:49.540+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:15:49.599+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:16:49.657+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:17:49.725+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:18:49.813+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:19:49.872+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:20:49.929+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:21:49.986+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:22:50.044+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:23:50.102+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:24:50.160+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:25:50.216+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:26:50.272+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:27:50.331+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:28:50.388+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:29:50.446+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:30:50.490+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:31:50.563+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:32:50.571+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:33:50.623+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:34:50.678+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:35:50.736+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:36:50.794+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:37:50.852+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:38:50.910+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:39:50.968+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:40:51.026+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:41:51.085+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:42:51.142+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:43:51.200+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:44:51.258+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:45:51.317+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
+[2024-11-26T00:46:51.375+0000] {python.py:72} INFO - Poking callable: <function _detect_file at 0x7f9fab268700>
