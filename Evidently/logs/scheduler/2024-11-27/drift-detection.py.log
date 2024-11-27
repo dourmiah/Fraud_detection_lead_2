@@ -8580,3 +8580,59 @@
 [2024-11-27T14:44:43.844+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:44:43.843+0000] {dag.py:2941} INFO - Sync 1 DAGs
 [2024-11-27T14:44:43.900+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:44:43.896+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
 [2024-11-27T14:44:43.970+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 4.963 seconds
+[2024-11-27T14:45:14.318+0000] {processor.py:157} INFO - Started process (PID=60042) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:14.319+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:45:14.321+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:14.321+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:19.841+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:19.879+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:19.878+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:45:19.915+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:19.915+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:45:19.945+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.632 seconds
+[2024-11-27T14:45:50.183+0000] {processor.py:157} INFO - Started process (PID=60071) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:50.184+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:45:50.186+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:50.186+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:55.439+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:45:55.481+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:55.480+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:45:55.531+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:45:55.530+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:45:55.570+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.395 seconds
+[2024-11-27T14:46:25.866+0000] {processor.py:157} INFO - Started process (PID=60108) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:46:25.867+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:46:25.868+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:46:25.868+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:46:31.032+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:46:31.076+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:46:31.075+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:46:31.117+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:46:31.116+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:46:31.154+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.293 seconds
+[2024-11-27T14:47:01.412+0000] {processor.py:157} INFO - Started process (PID=60137) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:01.413+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:47:01.414+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:01.414+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:05.381+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:05.412+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:05.411+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:47:05.441+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:05.441+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:47:05.460+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 4.052 seconds
+[2024-11-27T14:47:35.641+0000] {processor.py:157} INFO - Started process (PID=60174) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:35.642+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:47:35.643+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:35.643+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:40.840+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:47:40.871+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:40.870+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:47:40.899+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:47:40.899+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:47:40.931+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.296 seconds
+[2024-11-27T14:48:11.179+0000] {processor.py:157} INFO - Started process (PID=60203) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:11.180+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:48:11.182+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:11.181+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:16.189+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:16.234+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:16.233+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:48:16.276+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:16.275+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:48:16.307+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.133 seconds
+[2024-11-27T14:48:46.409+0000] {processor.py:157} INFO - Started process (PID=60240) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:46.410+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:48:46.411+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:46.411+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:51.904+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:48:51.936+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:51.935+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:48:51.971+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:48:51.971+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:48:51.998+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.593 seconds
+[2024-11-27T14:49:22.209+0000] {processor.py:157} INFO - Started process (PID=60277) to work on /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:49:22.210+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/drift-detection.py for tasks to queue
+[2024-11-27T14:49:22.212+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:49:22.212+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:49:27.454+0000] {processor.py:839} INFO - DAG(s) dict_keys(['drift_detection_dag']) retrieved from /opt/airflow/dags/drift-detection.py
+[2024-11-27T14:49:27.482+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:49:27.481+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2024-11-27T14:49:27.523+0000] {logging_mixin.py:154} INFO - [2024-11-27T14:49:27.523+0000] {dag.py:3722} INFO - Setting next_dagrun for drift_detection_dag to 2024-11-26T16:00:00+00:00, run_after=2024-11-27T16:00:00+00:00
+[2024-11-27T14:49:27.560+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/drift-detection.py took 5.355 seconds

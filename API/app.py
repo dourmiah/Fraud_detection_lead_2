@@ -19,7 +19,6 @@ class PredictionFeatures(BaseModel):
     input: list
     
 
-
 @app.post('/predict')
 async def predict(predictionfeatures: PredictionFeatures):
     ### Predict if a transaction is a fraud
