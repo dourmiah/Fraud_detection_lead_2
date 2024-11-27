@@ -58,15 +58,15 @@ async def predict(predictionfeatures: PredictionFeatures):
         "merch_lat",
         "merch_long"
     ]
-    
+    print(f"input_data*******************{input_data}")
+    print(f"input_features *******************{input_features}")
     df = pd.DataFrame(input_data, columns = input_features)
+    print(f"DATAFRAME DF *******************{df}")
     data = loaded_preprocessor.transform(df)
-
+    print(f"data après transform *******************{data}")
     prediction = loaded_model.predict(data)
 
-    # response = {
-    #     "Price": f"{prediction[0]:.2f} €"
-    # }
+
     response = {
         # "is_a_fraud ": "yes" if prediction[0] == "1" else "no"
         "is_a_fraud ": f"{prediction[0]}"

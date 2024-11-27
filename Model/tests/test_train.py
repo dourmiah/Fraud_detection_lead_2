@@ -14,7 +14,7 @@ trainer = ModelTrainer()
 @patch("pandas.read_csv")
 def test_load_data(mock_read_csv):
     
-    file_path = file_path = "https://dom-jedha-bucket.s3.eu-west-3.amazonaws.com/data/fraudTest.csv"
+    file_path = file_path = "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv"
     mock_data = pd.DataFrame({
         "id": [1, 2, 3],
         "col2": [4, 5, 6],
