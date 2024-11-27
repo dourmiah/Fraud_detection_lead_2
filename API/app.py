@@ -58,12 +58,10 @@ async def predict(predictionfeatures: PredictionFeatures):
         "merch_lat",
         "merch_long"
     ]
-    print(f"input_data*******************{input_data}")
-    print(f"input_features *******************{input_features}")
+    
     df = pd.DataFrame(input_data, columns = input_features)
-    print(f"DATAFRAME DF *******************{df}")
     data = loaded_preprocessor.transform(df)
-    print(f"data après transform *******************{data}")
+
     prediction = loaded_model.predict(data)
 
 

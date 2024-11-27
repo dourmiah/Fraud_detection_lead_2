@@ -1,0 +1,37 @@
+[2024-11-27T13:35:35.078+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:35.106+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:35.107+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-27T13:35:35.133+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): data_drift_detected> on 2024-11-27 13:35:13.424971+00:00
+[2024-11-27T13:35:35.151+0000] {standard_task_runner.py:57} INFO - Started process 35555 to run task
+[2024-11-27T13:35:35.157+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'data_drift_detected', 'manual__2024-11-27T13:35:13.424971+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpli2ylw5z']
+[2024-11-27T13:35:35.166+0000] {standard_task_runner.py:85} INFO - Job 38: Subtask data_drift_detected
+[2024-11-27T13:35:35.258+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.data_drift_detected manual__2024-11-27T13:35:13.424971+00:00 [running]> on host 88ce0f125f41
+[2024-11-27T13:35:35.395+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='data_drift_detected' AIRFLOW_CTX_EXECUTION_DATE='2024-11-27T13:35:13.424971+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-27T13:35:13.424971+00:00'
+[2024-11-27T13:35:35.486+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-27T13:35:35.487+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-27T13:35:35.492+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-27T13:35:35.493+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-27T13:35:35.648+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-27T13:35:35.649+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-27T13:35:35.655+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-27T13:35:35.656+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-27T13:35:35.871+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-11-27T13:35:35.885+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=data_drift_detected, execution_date=20241127T133513, start_date=20241127T133535, end_date=20241127T133535
+[2024-11-27T13:35:35.935+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-27T13:35:36.004+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,17 @@
+[2024-11-27T13:35:42.158+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.send_email manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:42.176+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.send_email manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:42.177+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-27T13:35:42.206+0000] {taskinstance.py:1382} INFO - Executing <Task(EmailOperator): send_email> on 2024-11-27 13:35:13.424971+00:00
+[2024-11-27T13:35:42.219+0000] {standard_task_runner.py:57} INFO - Started process 35577 to run task
+[2024-11-27T13:35:42.223+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'send_email', 'manual__2024-11-27T13:35:13.424971+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpiamfx24c']
+[2024-11-27T13:35:42.227+0000] {standard_task_runner.py:85} INFO - Job 39: Subtask send_email
+[2024-11-27T13:35:42.295+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.send_email manual__2024-11-27T13:35:13.424971+00:00 [running]> on host 88ce0f125f41
+[2024-11-27T13:35:42.433+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='send_email' AIRFLOW_CTX_EXECUTION_DATE='2024-11-27T13:35:13.424971+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-27T13:35:13.424971+00:00'
+[2024-11-27T13:35:42.450+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-11-27T13:35:42.451+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-11-27T13:35:42.677+0000] {email.py:281} INFO - Sent an alert email to ['jedhaprojetfrauddetect2@gmail.com']
+[2024-11-27T13:35:43.307+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=send_email, execution_date=20241127T133513, start_date=20241127T133542, end_date=20241127T133543
+[2024-11-27T13:35:43.359+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-27T13:35:43.399+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

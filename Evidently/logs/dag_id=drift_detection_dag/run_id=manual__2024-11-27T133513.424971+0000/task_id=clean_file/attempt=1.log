@@ -1,0 +1,13 @@
+[2024-11-27T13:35:49.202+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.clean_file manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:49.215+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.clean_file manual__2024-11-27T13:35:13.424971+00:00 [queued]>
+[2024-11-27T13:35:49.216+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-27T13:35:49.237+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): clean_file> on 2024-11-27 13:35:13.424971+00:00
+[2024-11-27T13:35:49.247+0000] {standard_task_runner.py:57} INFO - Started process 35591 to run task
+[2024-11-27T13:35:49.251+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'clean_file', 'manual__2024-11-27T13:35:13.424971+00:00', '--job-id', '40', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpyxx1wnty']
+[2024-11-27T13:35:49.257+0000] {standard_task_runner.py:85} INFO - Job 40: Subtask clean_file
+[2024-11-27T13:35:49.319+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.clean_file manual__2024-11-27T13:35:13.424971+00:00 [running]> on host 88ce0f125f41
+[2024-11-27T13:35:49.433+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='clean_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-27T13:35:13.424971+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-27T13:35:13.424971+00:00'
+[2024-11-27T13:35:49.450+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-11-27T13:35:49.463+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=clean_file, execution_date=20241127T133513, start_date=20241127T133549, end_date=20241127T133549
+[2024-11-27T13:35:49.504+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-27T13:35:49.527+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
