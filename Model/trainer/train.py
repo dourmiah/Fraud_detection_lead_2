@@ -32,7 +32,7 @@ import pickle
 
 author = "Dominique"
 nb_estimators = 150
-file_path = "https://dom-jedha-bucket.s3.eu-west-3.amazonaws.com/data/fraudTest.csv"
+file_path = "https://lead-program-assets.s3.eu-west-3.amazonaws.com/M05-Projects/fraudTest.csv"
 
 mlflow.set_tracking_uri(os.environ["APP_URI"])
 

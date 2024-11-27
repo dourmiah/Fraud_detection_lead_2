@@ -69,6 +69,8 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    env_file:
+      - .env
     healthcheck:
       test:
         [
@@ -87,6 +89,8 @@ services:
   airflow-worker:
     <<: *airflow-common
     command: celery worker
+    env_file:
+      - .env
     healthcheck:
       test:
         - "CMD-SHELL"
@@ -106,6 +110,8 @@ services:
   airflow-triggerer:
     <<: *airflow-common
     command: triggerer
+    env_file:
+      - .env
     healthcheck:
       test:
         [

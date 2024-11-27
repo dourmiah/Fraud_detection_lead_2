@@ -1,0 +1,40 @@
+[2024-11-26T18:43:14.806+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.detect_data_drift manual__2024-11-26T18:42:51.921307+00:00 [queued]>
+[2024-11-26T18:43:14.825+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.detect_data_drift manual__2024-11-26T18:42:51.921307+00:00 [queued]>
+[2024-11-26T18:43:14.826+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-26T18:43:14.849+0000] {taskinstance.py:1382} INFO - Executing <Task(BranchPythonOperator): detect_data_drift> on 2024-11-26 18:42:51.921307+00:00
+[2024-11-26T18:43:14.863+0000] {standard_task_runner.py:57} INFO - Started process 262 to run task
+[2024-11-26T18:43:14.869+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'detect_data_drift', 'manual__2024-11-26T18:42:51.921307+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp257zrm7s']
+[2024-11-26T18:43:14.874+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask detect_data_drift
+[2024-11-26T18:43:14.944+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.detect_data_drift manual__2024-11-26T18:42:51.921307+00:00 [running]> on host 88ce0f125f41
+[2024-11-26T18:43:15.047+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='detect_data_drift' AIRFLOW_CTX_EXECUTION_DATE='2024-11-26T18:42:51.921307+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-26T18:42:51.921307+00:00'
+[2024-11-26T18:43:15.207+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T18:43:15.208+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T18:43:15.212+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T18:43:15.213+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T18:43:15.361+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T18:43:15.362+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T18:43:15.367+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T18:43:15.368+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T18:43:15.509+0000] {python.py:194} INFO - Done. Returned value was: data_drift_detected
+[2024-11-26T18:43:15.509+0000] {python.py:227} INFO - Branch callable return data_drift_detected
+[2024-11-26T18:43:15.510+0000] {skipmixin.py:173} INFO - Following branch data_drift_detected
+[2024-11-26T18:43:15.548+0000] {skipmixin.py:239} INFO - Skipping tasks [('no_data_drift_detected', -1)]
+[2024-11-26T18:43:15.618+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=detect_data_drift, execution_date=20241126T184251, start_date=20241126T184314, end_date=20241126T184315
+[2024-11-26T18:43:15.683+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-26T18:43:15.737+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

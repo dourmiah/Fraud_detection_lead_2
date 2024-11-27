@@ -33,3 +33,114 @@ FileNotFoundError: [Errno 2] No such file or directory: '../data/reference/fraud
 [2024-11-25T23:16:15.954+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 21 for task data_drift_detected ([Errno 2] No such file or directory: '../data/reference/fraudTest-sample.csv'; 2620)
 [2024-11-25T23:16:16.008+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
 [2024-11-25T23:16:16.038+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-26T12:34:30.357+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T12:34:30.376+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T12:34:30.376+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-26T12:34:30.401+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): data_drift_detected> on 2024-11-24 16:00:00+00:00
+[2024-11-26T12:34:30.417+0000] {standard_task_runner.py:57} INFO - Started process 232 to run task
+[2024-11-26T12:34:30.433+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'data_drift_detected', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpdkx0ze6b']
+[2024-11-26T12:34:30.441+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask data_drift_detected
+[2024-11-26T12:34:30.558+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [running]> on host c359b096823c
+[2024-11-26T12:34:30.700+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='data_drift_detected' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-26T12:34:30.812+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T12:34:30.813+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T12:34:30.818+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T12:34:30.819+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T12:34:31.061+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T12:34:31.065+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T12:34:31.096+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T12:34:31.100+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T12:34:31.500+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-11-26T12:34:31.517+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=data_drift_detected, execution_date=20241124T160000, start_date=20241126T123430, end_date=20241126T123431
+[2024-11-26T12:34:31.581+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-26T12:34:31.630+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-26T13:40:25.856+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T13:40:25.874+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T13:40:25.875+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-26T13:40:25.896+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): data_drift_detected> on 2024-11-24 16:00:00+00:00
+[2024-11-26T13:40:25.906+0000] {standard_task_runner.py:57} INFO - Started process 330 to run task
+[2024-11-26T13:40:25.912+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'data_drift_detected', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp92gvnw_h']
+[2024-11-26T13:40:25.917+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask data_drift_detected
+[2024-11-26T13:40:25.992+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [running]> on host 8e7793c99557
+[2024-11-26T13:40:26.098+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='data_drift_detected' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-26T13:40:26.182+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T13:40:26.183+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T13:40:26.187+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T13:40:26.188+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T13:40:26.330+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T13:40:26.331+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T13:40:26.336+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T13:40:26.336+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T13:40:26.533+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-11-26T13:40:26.546+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=data_drift_detected, execution_date=20241124T160000, start_date=20241126T134025, end_date=20241126T134026
+[2024-11-26T13:40:26.606+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-26T13:40:26.655+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-26T15:57:22.507+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T15:57:22.525+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [queued]>
+[2024-11-26T15:57:22.526+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-26T15:57:22.552+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): data_drift_detected> on 2024-11-24 16:00:00+00:00
+[2024-11-26T15:57:22.568+0000] {standard_task_runner.py:57} INFO - Started process 300 to run task
+[2024-11-26T15:57:22.581+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'data_drift_detected', 'scheduled__2024-11-24T16:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmpbgkrrvm9']
+[2024-11-26T15:57:22.599+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask data_drift_detected
+[2024-11-26T15:57:22.741+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.data_drift_detected scheduled__2024-11-24T16:00:00+00:00 [running]> on host e76aaec22df7
+[2024-11-26T15:57:22.964+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='data_drift_detected' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T16:00:00+00:00'
+[2024-11-26T15:57:23.190+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T15:57:23.191+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T15:57:23.201+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T15:57:23.202+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T15:57:23.408+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T15:57:23.409+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T15:57:23.415+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+
+[2024-11-26T15:57:23.416+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+
+[2024-11-26T15:57:23.765+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-11-26T15:57:23.786+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=drift_detection_dag, task_id=data_drift_detected, execution_date=20241124T160000, start_date=20241126T155722, end_date=20241126T155723
+[2024-11-26T15:57:23.888+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-11-26T15:57:23.951+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

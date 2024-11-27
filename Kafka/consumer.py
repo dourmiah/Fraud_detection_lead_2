@@ -42,8 +42,8 @@ producer_conf = ccloud_lib.pop_schema_registry_params_from_config(CONF)
 producer = Producer(producer_conf)
 
 # URL MLFlow
-k_MLflow_Tracking_URL = "https://dom-fraud-detection-b8aae0fd5831.herokuapp.com/"
-k_Logged_Model = "runs:/ec18c5a8712c46aba841b47e9935751e/model"
+k_MLflow_Tracking_URL = "https://dom-fraud-detection-48e81565c75c.herokuapp.com/"
+k_Logged_Model = "runs:/f845fbd40b0f4c88a7f120eb2e5f7957/model"
 mlflow.set_tracking_uri(k_MLflow_Tracking_URL)
 loaded_model = mlflow.sklearn.load_model(k_Logged_Model)
 

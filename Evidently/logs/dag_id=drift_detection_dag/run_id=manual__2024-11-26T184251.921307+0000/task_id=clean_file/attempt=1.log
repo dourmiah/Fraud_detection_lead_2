@@ -1,0 +1,22 @@
+[2024-11-26T18:43:43.017+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: drift_detection_dag.clean_file manual__2024-11-26T18:42:51.921307+00:00 [queued]>
+[2024-11-26T18:43:43.032+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: drift_detection_dag.clean_file manual__2024-11-26T18:42:51.921307+00:00 [queued]>
+[2024-11-26T18:43:43.032+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-11-26T18:43:43.052+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): clean_file> on 2024-11-26 18:42:51.921307+00:00
+[2024-11-26T18:43:43.063+0000] {standard_task_runner.py:57} INFO - Started process 363 to run task
+[2024-11-26T18:43:43.068+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'drift_detection_dag', 'clean_file', 'manual__2024-11-26T18:42:51.921307+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/drift-detection.py', '--cfg-path', '/tmp/tmp7g8jjylv']
+[2024-11-26T18:43:43.073+0000] {standard_task_runner.py:85} INFO - Job 12: Subtask clean_file
+[2024-11-26T18:43:43.139+0000] {task_command.py:416} INFO - Running <TaskInstance: drift_detection_dag.clean_file manual__2024-11-26T18:42:51.921307+00:00 [running]> on host 88ce0f125f41
+[2024-11-26T18:43:43.278+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='drift_detection_dag' AIRFLOW_CTX_TASK_ID='clean_file' AIRFLOW_CTX_EXECUTION_DATE='2024-11-26T18:42:51.921307+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-26T18:42:51.921307+00:00'
+[2024-11-26T18:43:43.298+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/drift-detection.py", line 94, in _clean_file
+    os.remove(data_logs_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/data/data-drift/fraudTest-sample-drift - Copie.csv'
+[2024-11-26T18:43:43.313+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=drift_detection_dag, task_id=clean_file, execution_date=20241126T184251, start_date=20241126T184343, end_date=20241126T184343
+[2024-11-26T18:43:43.329+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 12 for task clean_file ([Errno 2] No such file or directory: '/opt/airflow/data/data-drift/fraudTest-sample-drift - Copie.csv'; 363)
+[2024-11-26T18:43:43.361+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-11-26T18:43:43.400+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
