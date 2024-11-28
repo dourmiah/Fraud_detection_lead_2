@@ -22,7 +22,7 @@ class PredictionFeatures(BaseModel):
 @app.post('/predict')
 async def predict(predictionfeatures: PredictionFeatures):
     ### Predict if a transaction is a fraud
-    input_data = predictionfeatures.input
+    input_data = predictionfeatures.input   
     # input_features = [
     #     "trans_date_trans_time",
     #     "cc_num",
